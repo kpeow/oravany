@@ -15,8 +15,8 @@ const IMG = {
     foret: 'assets/images/products/foret.jpg',
     heroPoivre: 'assets/images/products/hero-poivre.jpg',
     recoltant: 'assets/images/products/recoltant.jpg',
-    bundle: 'assets/images/products/bundle.jpg',
-    grossiste: 'assets/images/products/grossiste.jpg'
+    bundle: 'assets/images/products/bundle.png',
+    grossiste: 'assets/images/products/grossiste.png'
 };
 
 const PRODUCTS = [
