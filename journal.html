@@ -1,0 +1,220 @@
+<!DOCTYPE html>
+<html lang="fr">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0, viewport-fit=cover">
+    <meta name="theme-color" content="#F4EFE7">
+    <meta name="description" content="Le Journal ORAVANY — Carnet de voyage, rencontres avec les producteurs, conseils de dégustation, et l'art des épices rares de Madagascar.">
+    <title>Journal — ORAVANY</title>
+
+    <link rel="icon" type="image/png" href="assets/images/logo.png">
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Cormorant+Garamond:ital,wght@0,400;0,500;0,600;1,400;1,500&family=Cinzel:wght@400;500;600&family=Montserrat:wght@300;400;500;600;700&display=swap" rel="stylesheet">
+    <link rel="stylesheet" href="css/style.css">
+
+    <style>
+        .journal-grid {
+            display: grid;
+            grid-template-columns: repeat(3, 1fr);
+            gap: 2.5rem;
+        }
+        @media (max-width: 900px) { .journal-grid { grid-template-columns: repeat(2, 1fr); } }
+        @media (max-width: 600px) { .journal-grid { grid-template-columns: 1fr; } }
+
+        .article-card {
+            background-color: var(--color-white);
+            border-radius: 4px;
+            overflow: hidden;
+            box-shadow: var(--shadow-soft);
+            transition: all var(--transition);
+            display: flex;
+            flex-direction: column;
+        }
+        .article-card:hover {
+            transform: translateY(-4px);
+            box-shadow: var(--shadow-hover);
+        }
+        .article-image {
+            aspect-ratio: 4 / 3;
+            overflow: hidden;
+        }
+        .article-image img {
+            width: 100%;
+            height: 100%;
+            object-fit: cover;
+            transition: transform 0.8s ease;
+        }
+        .article-card:hover .article-image img { transform: scale(1.05); }
+
+        .article-body {
+            padding: 2rem 1.75rem;
+            display: flex;
+            flex-direction: column;
+            flex: 1;
+        }
+        .article-meta {
+            font-size: 0.7rem;
+            letter-spacing: 0.25em;
+            text-transform: uppercase;
+            color: var(--color-gold);
+            margin-bottom: 0.75rem;
+        }
+        .article-title {
+            font-family: var(--font-title);
+            font-weight: 400;
+            font-size: 1.4rem;
+            line-height: 1.3;
+            margin-bottom: 0.75rem;
+            color: var(--color-black);
+        }
+        .article-excerpt {
+            color: var(--color-grey);
+            font-size: 0.9rem;
+            line-height: 1.7;
+            margin-bottom: 1.5rem;
+            flex: 1;
+        }
+        .article-link {
+            font-size: 0.7rem;
+            letter-spacing: 0.25em;
+            text-transform: uppercase;
+            color: var(--color-gold);
+            border-bottom: 1px solid var(--color-gold);
+            padding-bottom: 2px;
+            align-self: flex-start;
+            transition: color var(--transition);
+        }
+        .article-link:hover { color: var(--color-green); border-color: var(--color-green); }
+
+        .coming-soon {
+            text-align: center;
+            padding: 4rem 1.5rem;
+            background-color: var(--color-cream);
+            border: 1px dashed rgba(139, 107, 46, 0.3);
+            border-radius: 4px;
+            margin-top: 3rem;
+        }
+    </style>
+</head>
+<body data-page="journal">
+
+<div id="header-host"></div>
+
+<section class="page-header">
+    <div class="container">
+        <p class="breadcrumb"><a href="index.html">Accueil</a><span class="sep">/</span>Journal</p>
+        <h1>Le Journal ORAVANY</h1>
+        <p style="color:var(--color-grey); max-width:640px; margin:1rem auto 0; font-style:italic; font-family:var(--font-title); font-size:1.15rem;">
+            Carnet de voyage, rencontres avec les producteurs, conseils de dégustation — l'âme malgache à portée de page.
+        </p>
+    </div>
+</section>
+
+<section class="section" style="padding-top:2rem;">
+    <div class="container">
+        <div class="journal-grid">
+
+            <article class="article-card">
+                <div class="article-image">
+                    <img src="assets/images/products/foret.jpg" alt="Récolte du poivre Voatsiperifery">
+                </div>
+                <div class="article-body">
+                    <p class="article-meta">Reportage · 8 min de lecture</p>
+                    <h2 class="article-title">Au cœur des forêts du Voatsiperifery</h2>
+                    <p class="article-excerpt">
+                        Une immersion dans les forêts primaires du sud-est de Madagascar, à la rencontre des cueilleurs qui perpétuent une tradition séculaire — récolter, à 15 mètres de hauteur, le plus rare des poivres sauvages.
+                    </p>
+                    <a href="#" class="article-link">Lire l'article →</a>
+                </div>
+            </article>
+
+            <article class="article-card">
+                <div class="article-image">
+                    <img src="assets/images/products/vanille.svg" alt="Affinage de la vanille Bourbon">
+                </div>
+                <div class="article-body">
+                    <p class="article-meta">Savoir-faire · 6 min de lecture</p>
+                    <h2 class="article-title">Les 9 mois d'affinage de la vanille Bourbon</h2>
+                    <p class="article-excerpt">
+                        Échaudage, étuvage, séchage au soleil, mise en malle… Découvrez les étapes patientes qui transforment une gousse verte en l'une des épices les plus précieuses au monde.
+                    </p>
+                    <a href="#" class="article-link">Lire l'article →</a>
+                </div>
+            </article>
+
+            <article class="article-card">
+                <div class="article-image">
+                    <img src="assets/images/products/epices-assorties.jpg" alt="Dégustation d'épices">
+                </div>
+                <div class="article-body">
+                    <p class="article-meta">Dégustation · 5 min de lecture</p>
+                    <h2 class="article-title">L'art de marier le Voatsiperifery</h2>
+                    <p class="article-excerpt">
+                        Notes boisées, fraîcheur citronnée, finale florale… Cinq accords parfaits pour révéler toute la complexité de notre poivre signature, du chocolat noir au poisson noble.
+                    </p>
+                    <a href="#" class="article-link">Lire l'article →</a>
+                </div>
+            </article>
+
+            <article class="article-card">
+                <div class="article-image">
+                    <img src="assets/images/products/paysage-mada.jpg" alt="Région SAVA de Madagascar">
+                </div>
+                <div class="article-body">
+                    <p class="article-meta">Terroir · 7 min de lecture</p>
+                    <h2 class="article-title">SAVA, berceau de la vanille mondiale</h2>
+                    <p class="article-excerpt">
+                        Au nord-est de l'île, quatre régions — Sambava, Antalaha, Vohémar, Andapa — concentrent à elles seules 80 % de la production mondiale de vanille. Histoire d'un terroir d'exception.
+                    </p>
+                    <a href="#" class="article-link">Lire l'article →</a>
+                </div>
+            </article>
+
+            <article class="article-card">
+                <div class="article-image">
+                    <img src="assets/images/products/cannelle.svg" alt="Bâtons de cannelle">
+                </div>
+                <div class="article-body">
+                    <p class="article-meta">Conseils · 4 min de lecture</p>
+                    <h2 class="article-title">Cannelle de Ceylan vs casse : reconnaître la vraie</h2>
+                    <p class="article-excerpt">
+                        Toutes les "cannelles" ne se valent pas. Apprenez à distinguer la vraie cannelle (Cinnamomum verum) — fine, claire, multi-feuilletée — de sa cousine plus rustique, la casse.
+                    </p>
+                    <a href="#" class="article-link">Lire l'article →</a>
+                </div>
+            </article>
+
+            <article class="article-card">
+                <div class="article-image">
+                    <img src="assets/images/products/riz-rouge.jpg" alt="Cuisine malgache">
+                </div>
+                <div class="article-body">
+                    <p class="article-meta">Recette · 12 min de lecture</p>
+                    <h2 class="article-title">Romazava aux épices ORAVANY</h2>
+                    <p class="article-excerpt">
+                        Le plat national malgache revisité avec nos épices premium. Une recette transmise par nos producteurs partenaires, à savourer en famille.
+                    </p>
+                    <a href="#" class="article-link">Lire la recette →</a>
+                </div>
+            </article>
+
+        </div>
+
+        <div class="coming-soon">
+            <p style="font-family:var(--font-title); font-style:italic; color:var(--color-gold); font-size:1.2rem; margin-bottom:0.5rem;">
+                D'autres récits arrivent bientôt
+            </p>
+            <p style="color:var(--color-grey); font-size:0.9rem;">
+                Recevez chaque nouveau récit en avant-première via notre newsletter — promis, peu de mots, beaucoup d'âme.
+            </p>
+        </div>
+    </div>
+</section>
+
+<div id="footer-host"></div>
+
+<script src="js/products.js"></script>
+<script src="js/script.js"></script>
+</body>
+</html>

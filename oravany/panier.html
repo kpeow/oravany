@@ -1,0 +1,167 @@
+<!DOCTYPE html>
+<html lang="fr">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0, viewport-fit=cover">
+    <meta name="theme-color" content="#F4EFE7">
+    <title>Mon panier — ORAVANY</title>
+
+    <link rel="icon" type="image/png" href="assets/images/logo.png">
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Cormorant+Garamond:ital,wght@0,400;0,500;0,600;1,400;1,500&family=Cinzel:wght@400;500;600&family=Montserrat:wght@300;400;500;600;700&display=swap" rel="stylesheet">
+    <link rel="stylesheet" href="css/style.css">
+</head>
+<body data-page="panier">
+
+<div id="header-host"></div>
+
+<section class="cart-page">
+    <div class="container">
+        <p class="breadcrumb" style="margin-bottom:2rem;">
+            <a href="index.html">Accueil</a><span class="sep">/</span>
+            <a href="boutique.html">Boutique</a><span class="sep">/</span>Panier
+        </p>
+        <h1 style="font-family:var(--font-title); font-weight:400; margin-bottom:2.5rem;">Mon panier</h1>
+        <div id="cart-content"></div>
+    </div>
+</section>
+
+<div id="footer-host"></div>
+
+<script src="js/products.js"></script>
+<script src="js/script.js"></script>
+<script>
+    const SHIPPING_THRESHOLD = 80;
+    const SHIPPING_COST = 6.90;
+
+    function renderCart() {
+        const container = document.getElementById('cart-content');
+        const cart = getCart();
+
+        if (cart.length === 0) {
+            container.innerHTML = `
+                <div class="cart-empty">
+                    <svg width="80" height="80" fill="none" stroke="currentColor" viewBox="0 0 24 24" style="color:var(--color-gold); margin: 0 auto 1.5rem;">
+                        <path stroke-linecap="round" stroke-linejoin="round" stroke-width="1" d="M3 3h2l.4 2M7 13h10l4-8H5.4M7 13L5.4 5M7 13l-2.293 2.293c-.63.63-.184 1.707.707 1.707H17m0 0a2 2 0 100 4 2 2 0 000-4zm-8 2a2 2 0 11-4 0 2 2 0 014 0z"/>
+                    </svg>
+                    <h2>Votre panier est vide</h2>
+                    <p>Découvrez nos épices rares de Madagascar.</p>
+                    <a href="boutique.html" class="btn btn-primary">Voir la boutique</a>
+                </div>
+            `;
+            return;
+        }
+
+        const subtotal = getCartTotal();
+        const shipping = subtotal >= SHIPPING_THRESHOLD ? 0 : SHIPPING_COST;
+        const total = subtotal + shipping;
+        const remainingForFree = Math.max(0, SHIPPING_THRESHOLD - subtotal);
+
+        container.innerHTML = `
+            <div class="cart-grid">
+                <div class="cart-items">
+                    ${cart.map(item => `
+                        <div class="cart-item" data-id="${item.id}" data-format="${item.format}">
+                            <div class="cart-item-image">
+                                <img src="${item.image}" alt="${item.name}">
+                            </div>
+                            <div class="cart-item-info">
+                                <h3>${item.name}</h3>
+                                <p class="cart-item-format">Format : ${item.format}</p>
+                                <p class="cart-item-price">${formatPrice(item.price)}</p>
+                            </div>
+                            <div class="cart-item-right">
+                                <div class="quantity-selector">
+                                    <button class="qty-btn" onclick="changeQty('${item.id}', '${item.format}', -1)">−</button>
+                                    <input type="number" class="qty-input" value="${item.quantity}" min="1" max="99"
+                                           onchange="setQty('${item.id}', '${item.format}', this.value)">
+                                    <button class="qty-btn" onclick="changeQty('${item.id}', '${item.format}', 1)">+</button>
+                                </div>
+                                <button class="cart-item-remove" onclick="removeItem('${item.id}', '${item.format}')">
+                                    Retirer
+                                </button>
+                            </div>
+                        </div>
+                    `).join('')}
+                </div>
+
+                <aside class="cart-summary">
+                    <h3>Récapitulatif</h3>
+                    ${remainingForFree > 0 ? `
+                        <div style="background:var(--color-cream); padding:0.85rem 1rem; border-radius:2px; font-size:0.8rem; color:var(--color-grey); margin-bottom:1.25rem; text-align:center;">
+                            Plus que <strong style="color:var(--color-gold);">${formatPrice(remainingForFree)}</strong> pour la livraison offerte
+                        </div>
+                    ` : `
+                        <div style="background:var(--color-cream); padding:0.85rem 1rem; border-radius:2px; font-size:0.8rem; color:var(--color-green); margin-bottom:1.25rem; text-align:center;">
+                            &#10003; Vous bénéficiez de la livraison offerte
+                        </div>
+                    `}
+
+                    <div class="summary-row">
+                        <span>Sous-total</span>
+                        <span>${formatPrice(subtotal)}</span>
+                    </div>
+                    <div class="summary-row">
+                        <span>Livraison</span>
+                        <span>${shipping === 0 ? 'Offerte' : formatPrice(shipping)}</span>
+                    </div>
+
+                    <div class="promo-row">
+                        <input type="text" placeholder="Code promo" id="promo-input">
+                        <button onclick="applyPromo()">OK</button>
+                    </div>
+
+                    <div class="summary-row total">
+                        <span>Total</span>
+                        <span>${formatPrice(total)}</span>
+                    </div>
+
+                    <a href="checkout.html" class="btn btn-primary btn-block btn-large" style="margin-top:1.5rem;">Procéder au paiement</a>
+                    <a href="boutique.html" class="btn btn-outline btn-block" style="margin-top:0.75rem;">Continuer mes achats</a>
+
+                    <div style="margin-top:1.5rem; padding-top:1.5rem; border-top:1px solid var(--color-cream-dark); font-size:0.75rem; color:var(--color-grey); display:flex; align-items:center; gap:0.5rem;">
+                        <svg width="16" height="16" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="1.5" d="M12 15v2m-6 4h12a2 2 0 002-2v-6a2 2 0 00-2-2H6a2 2 0 00-2 2v6a2 2 0 002 2zm10-10V7a4 4 0 00-8 0v4h8z"/></svg>
+                        Paiement 100% sécurisé
+                    </div>
+                </aside>
+            </div>
+        `;
+    }
+
+    function changeQty(id, format, delta) {
+        const cart = getCart();
+        const item = cart.find(i => i.id === id && i.format === format);
+        if (item) {
+            updateQuantity(id, format, item.quantity + delta);
+            renderCart();
+        }
+    }
+
+    function setQty(id, format, value) {
+        const n = parseInt(value);
+        if (!isNaN(n) && n > 0) {
+            updateQuantity(id, format, n);
+            renderCart();
+        }
+    }
+
+    function removeItem(id, format) {
+        removeFromCart(id, format);
+        renderCart();
+    }
+
+    function applyPromo() {
+        const code = document.getElementById('promo-input').value.trim().toUpperCase();
+        if (code === 'ORAVANY10') {
+            showToast('Code promo appliqué : -10%');
+        } else if (code) {
+            showToast('Code promo invalide');
+        }
+    }
+
+    document.addEventListener('DOMContentLoaded', renderCart);
+    document.addEventListener('cart:updated', renderCart);
+</script>
+</body>
+</html>

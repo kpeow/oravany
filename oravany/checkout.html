@@ -1,0 +1,389 @@
+<!DOCTYPE html>
+<html lang="fr">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0, viewport-fit=cover">
+    <meta name="theme-color" content="#F4EFE7">
+    <title>Paiement sécurisé — ORAVANY</title>
+
+    <link rel="icon" type="image/png" href="assets/images/logo.png">
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Cormorant+Garamond:ital,wght@0,400;0,500;0,600;1,400;1,500&family=Cinzel:wght@400;500;600&family=Montserrat:wght@300;400;500;600;700&display=swap" rel="stylesheet">
+    <link rel="stylesheet" href="css/style.css">
+
+    <!-- Stripe.js : à activer en production avec une clé publique réelle -->
+    <script src="https://js.stripe.com/v3/"></script>
+</head>
+<body data-page="checkout">
+
+<div id="header-host"></div>
+
+<section class="checkout-page">
+    <div class="container">
+        <p class="breadcrumb" style="margin-bottom:2rem;">
+            <a href="index.html">Accueil</a><span class="sep">/</span>
+            <a href="panier.html">Panier</a><span class="sep">/</span>Paiement
+        </p>
+        <h1 style="font-family:var(--font-title); font-weight:400; margin-bottom:2.5rem;">Paiement sécurisé</h1>
+
+        <div id="checkout-empty" class="cart-empty hidden">
+            <h2>Votre panier est vide</h2>
+            <p>Ajoutez des produits avant de procéder au paiement.</p>
+            <a href="boutique.html" class="btn btn-primary">Voir la boutique</a>
+        </div>
+
+        <div id="checkout-main" class="checkout-grid">
+            <form class="checkout-form" id="checkout-form" onsubmit="processPayment(event)">
+
+                <!-- ============ Coordonnées ============ -->
+                <div class="form-section">
+                    <h3>1. Vos coordonnées</h3>
+                    <div class="form-row">
+                        <div class="form-field">
+                            <label for="firstname">Prénom</label>
+                            <input type="text" id="firstname" name="firstname" required>
+                        </div>
+                        <div class="form-field">
+                            <label for="lastname">Nom</label>
+                            <input type="text" id="lastname" name="lastname" required>
+                        </div>
+                    </div>
+                    <div class="form-field">
+                        <label for="email">Email</label>
+                        <input type="email" id="email" name="email" required>
+                    </div>
+                    <div class="form-field">
+                        <label for="phone">Téléphone</label>
+                        <input type="tel" id="phone" name="phone" required>
+                    </div>
+                </div>
+
+                <!-- ============ Livraison ============ -->
+                <div class="form-section">
+                    <h3>2. Adresse de livraison</h3>
+                    <div class="form-field">
+                        <label for="address">Adresse</label>
+                        <input type="text" id="address" name="address" placeholder="Numéro et nom de rue" required>
+                    </div>
+                    <div class="form-field">
+                        <label for="address2">Complément d'adresse</label>
+                        <input type="text" id="address2" name="address2" placeholder="Appartement, bâtiment...">
+                    </div>
+                    <div class="form-row">
+                        <div class="form-field">
+                            <label for="zipcode">Code postal</label>
+                            <input type="text" id="zipcode" name="zipcode" required>
+                        </div>
+                        <div class="form-field">
+                            <label for="city">Ville</label>
+                            <input type="text" id="city" name="city" required>
+                        </div>
+                    </div>
+                    <div class="form-field">
+                        <label for="country">Pays</label>
+                        <select id="country" name="country" required>
+                            <option value="FR">France</option>
+                            <option value="BE">Belgique</option>
+                            <option value="CH">Suisse</option>
+                            <option value="LU">Luxembourg</option>
+                            <option value="DE">Allemagne</option>
+                            <option value="IT">Italie</option>
+                            <option value="ES">Espagne</option>
+                            <option value="GB">Royaume-Uni</option>
+                            <option value="US">États-Unis</option>
+                            <option value="MG">Madagascar</option>
+                        </select>
+                    </div>
+                </div>
+
+                <!-- ============ Mode de paiement ============ -->
+                <div class="form-section">
+                    <h3>3. Mode de paiement</h3>
+                    <div class="payment-methods">
+                        <label class="payment-method active" data-method="card">
+                            <input type="radio" name="payment" value="card" checked>
+                            <div class="payment-method-info">
+                                <div>
+                                    <strong>Carte bancaire</strong>
+                                    <span>Visa, Mastercard, American Express — via Stripe</span>
+                                </div>
+                            </div>
+                            <div class="payment-method-logos">
+                                <svg width="34" height="22" viewBox="0 0 34 22"><rect width="34" height="22" rx="3" fill="#1A1F71"/><text x="17" y="15" text-anchor="middle" fill="white" font-size="9" font-weight="bold" font-family="Arial">VISA</text></svg>
+                                <svg width="34" height="22" viewBox="0 0 34 22"><rect width="34" height="22" rx="3" fill="#fff" stroke="#ddd"/><circle cx="13" cy="11" r="6" fill="#EB001B"/><circle cx="21" cy="11" r="6" fill="#F79E1B" fill-opacity="0.9"/></svg>
+                                <svg width="34" height="22" viewBox="0 0 34 22"><rect width="34" height="22" rx="3" fill="#016FD0"/><text x="17" y="15" text-anchor="middle" fill="white" font-size="6" font-weight="bold" font-family="Arial">AMEX</text></svg>
+                            </div>
+                        </label>
+
+                        <div class="card-fields visible" id="card-fields">
+                            <div class="form-field">
+                                <label for="card-name">Nom sur la carte</label>
+                                <input type="text" id="card-name" placeholder="JEAN DUPONT">
+                            </div>
+                            <div class="form-field">
+                                <label for="card-number">Numéro de carte</label>
+                                <input type="text" id="card-number" placeholder="1234 5678 9012 3456" maxlength="19" inputmode="numeric">
+                            </div>
+                            <div class="form-row">
+                                <div class="form-field">
+                                    <label for="card-exp">Date d'expiration</label>
+                                    <input type="text" id="card-exp" placeholder="MM/AA" maxlength="5" inputmode="numeric">
+                                </div>
+                                <div class="form-field">
+                                    <label for="card-cvc">CVC</label>
+                                    <input type="text" id="card-cvc" placeholder="123" maxlength="4" inputmode="numeric">
+                                </div>
+                            </div>
+                            <p style="font-size:0.75rem; color:var(--color-grey); margin-top:0.5rem; display:flex; align-items:center; gap:0.5rem;">
+                                <svg width="14" height="14" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M12 15v2m-6 4h12a2 2 0 002-2v-6a2 2 0 00-2-2H6a2 2 0 00-2 2v6a2 2 0 002 2zm10-10V7a4 4 0 00-8 0v4h8z"/></svg>
+                                Chiffrement SSL — vos données ne sont jamais stockées sur nos serveurs.
+                            </p>
+                        </div>
+
+                        <label class="payment-method" data-method="paypal">
+                            <input type="radio" name="payment" value="paypal">
+                            <div class="payment-method-info">
+                                <div>
+                                    <strong>PayPal</strong>
+                                    <span>Payez avec votre compte PayPal</span>
+                                </div>
+                            </div>
+                            <div class="payment-method-logos">
+                                <svg width="60" height="22" viewBox="0 0 60 22"><rect width="60" height="22" rx="3" fill="#003087"/><text x="30" y="15" text-anchor="middle" fill="#00A4DD" font-size="9" font-weight="bold" font-family="Arial">PayPal</text></svg>
+                            </div>
+                        </label>
+
+                        <label class="payment-method" data-method="wallet">
+                            <input type="radio" name="payment" value="wallet">
+                            <div class="payment-method-info">
+                                <div>
+                                    <strong>Apple Pay / Google Pay</strong>
+                                    <span>Paiement express via votre appareil</span>
+                                </div>
+                            </div>
+                            <div class="payment-method-logos">
+                                <svg width="34" height="22" viewBox="0 0 34 22"><rect width="34" height="22" rx="3" fill="#000"/><text x="17" y="15" text-anchor="middle" fill="white" font-size="8" font-weight="500" font-family="Arial">Pay</text></svg>
+                                <svg width="34" height="22" viewBox="0 0 34 22"><rect width="34" height="22" rx="3" fill="#fff" stroke="#ddd"/><text x="17" y="14" text-anchor="middle" fill="#5F6368" font-size="7" font-weight="500" font-family="Arial">G Pay</text></svg>
+                            </div>
+                        </label>
+
+                        <label class="payment-method" data-method="transfer">
+                            <input type="radio" name="payment" value="transfer">
+                            <div class="payment-method-info">
+                                <div>
+                                    <strong>Virement bancaire</strong>
+                                    <span>Coordonnées envoyées par email après commande</span>
+                                </div>
+                            </div>
+                            <div class="payment-method-logos">
+                                <svg width="22" height="22" fill="none" stroke="#8B6B2E" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="1.5" d="M3 10h18M3 14h18m-2-9l2 2-2 2M5 19l-2-2 2-2"/></svg>
+                            </div>
+                        </label>
+                    </div>
+
+                    <div class="form-field" style="margin-top:1rem;">
+                        <label style="display:flex; align-items:flex-start; gap:0.6rem; font-weight:400; font-size:0.85rem; letter-spacing:0; text-transform:none; color:var(--color-grey); cursor:pointer;">
+                            <input type="checkbox" required style="margin-top:3px; width:16px; height:16px; accent-color:var(--color-gold);">
+                            <span>J'accepte les <a href="#" style="color:var(--color-gold); text-decoration:underline;">conditions générales de vente</a> et la <a href="#" style="color:var(--color-gold); text-decoration:underline;">politique de confidentialité</a>.</span>
+                        </label>
+                    </div>
+                </div>
+
+                <button type="submit" class="btn btn-primary btn-block btn-large" id="pay-btn">
+                    <span id="pay-btn-text">Payer maintenant</span>
+                </button>
+
+                <p style="text-align:center; font-size:0.75rem; color:var(--color-grey); margin-top:1rem; display:flex; align-items:center; justify-content:center; gap:0.5rem;">
+                    <svg width="14" height="14" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M9 12l2 2 4-4M21 12c0 4.97-4.03 9-9 9s-9-4.03-9-9 4.03-9 9-9 9 4.03 9 9z"/></svg>
+                    Paiement 100% sécurisé · Conforme PCI-DSS · 3D Secure
+                </p>
+            </form>
+
+            <aside class="checkout-summary">
+                <h3>Votre commande</h3>
+                <div class="summary-products" id="summary-products"></div>
+                <div class="summary-row">
+                    <span>Sous-total</span>
+                    <span id="summary-subtotal">—</span>
+                </div>
+                <div class="summary-row">
+                    <span>Livraison</span>
+                    <span id="summary-shipping">—</span>
+                </div>
+                <div class="summary-row">
+                    <span>TVA (20%)</span>
+                    <span id="summary-tax">—</span>
+                </div>
+                <div class="summary-row total">
+                    <span>Total TTC</span>
+                    <span id="summary-total">—</span>
+                </div>
+                <div class="security-note">
+                    <svg width="16" height="16" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="1.5" d="M12 15v2m-6 4h12a2 2 0 002-2v-6a2 2 0 00-2-2H6a2 2 0 00-2 2v6a2 2 0 002 2zm10-10V7a4 4 0 00-8 0v4h8z"/></svg>
+                    Vos informations sont chiffrées (SSL 256 bits)
+                </div>
+            </aside>
+        </div>
+    </div>
+</section>
+
+<!-- ====== Modal confirmation ====== -->
+<div id="success-modal" style="display:none; position:fixed; inset:0; background:rgba(34,34,34,0.6); z-index:3000; align-items:center; justify-content:center; padding:1rem;">
+    <div style="background:var(--color-cream); padding:3rem 2.5rem; border-radius:6px; max-width:480px; width:100%; text-align:center; box-shadow:var(--shadow-hover);">
+        <div style="width:80px; height:80px; background:var(--color-gold); border-radius:50%; display:flex; align-items:center; justify-content:center; margin:0 auto 1.5rem;">
+            <svg width="40" height="40" fill="none" stroke="white" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M5 13l4 4L19 7"/></svg>
+        </div>
+        <h2 style="font-family:var(--font-title); font-weight:400; margin-bottom:1rem;">Commande confirmée</h2>
+        <p style="color:var(--color-grey); margin-bottom:0.5rem;">Merci pour votre commande !</p>
+        <p style="color:var(--color-grey); margin-bottom:2rem; font-size:0.9rem;">
+            Un email de confirmation a été envoyé à <strong id="confirm-email" style="color:var(--color-black);"></strong>.<br>
+            Numéro de commande : <strong id="order-number" style="color:var(--color-gold);"></strong>
+        </p>
+        <a href="index.html" class="btn btn-primary btn-block">Retour à l'accueil</a>
+    </div>
+</div>
+
+<div id="footer-host"></div>
+
+<script src="js/products.js"></script>
+<script src="js/script.js"></script>
+<script>
+    const SHIPPING_THRESHOLD = 80;
+    const SHIPPING_COST = 6.90;
+    const TVA_RATE = 0.20;
+
+    // ⚠️ Clé publique Stripe — à remplacer par la vôtre en production.
+    // Récupérez votre clé sur https://dashboard.stripe.com/apikeys
+    const STRIPE_PUBLIC_KEY = 'pk_test_TYooMQauvdEDq54NiTphI7jx';
+    let stripe = null;
+    if (typeof Stripe !== 'undefined') {
+        try {
+            stripe = Stripe(STRIPE_PUBLIC_KEY);
+        } catch (e) {
+            console.warn('Stripe non initialisé — utilisez votre clé publique en production.');
+        }
+    }
+
+    function renderCheckout() {
+        const cart = getCart();
+        const empty = document.getElementById('checkout-empty');
+        const main = document.getElementById('checkout-main');
+
+        if (cart.length === 0) {
+            empty.classList.remove('hidden');
+            main.style.display = 'none';
+            return;
+        }
+
+        empty.classList.add('hidden');
+        main.style.display = '';
+
+        const subtotal = getCartTotal();
+        const shipping = subtotal >= SHIPPING_THRESHOLD ? 0 : SHIPPING_COST;
+        const totalHT = subtotal + shipping;
+        const tax = totalHT * TVA_RATE / (1 + TVA_RATE); // TVA incluse
+        const total = totalHT;
+
+        document.getElementById('summary-products').innerHTML = cart.map(item => `
+            <div class="summary-product">
+                <div class="summary-product-image"><img src="${item.image}" alt="${item.name}"></div>
+                <div class="summary-product-info">
+                    <strong>${item.name}</strong>
+                    <span>${item.format} × ${item.quantity}</span>
+                </div>
+                <div class="summary-product-price">${formatPrice(item.price * item.quantity)}</div>
+            </div>
+        `).join('');
+
+        document.getElementById('summary-subtotal').textContent = formatPrice(subtotal);
+        document.getElementById('summary-shipping').textContent = shipping === 0 ? 'Offerte' : formatPrice(shipping);
+        document.getElementById('summary-tax').textContent = formatPrice(tax);
+        document.getElementById('summary-total').textContent = formatPrice(total);
+
+        document.getElementById('pay-btn-text').textContent = `Payer ${formatPrice(total)}`;
+    }
+
+    // Sélecteur de moyen de paiement
+    document.addEventListener('change', (e) => {
+        if (e.target.name === 'payment') {
+            document.querySelectorAll('.payment-method').forEach(m => m.classList.remove('active'));
+            e.target.closest('.payment-method').classList.add('active');
+
+            const cardFields = document.getElementById('card-fields');
+            cardFields.classList.toggle('visible', e.target.value === 'card');
+
+            const btn = document.getElementById('pay-btn-text');
+            const total = formatPrice(getCartTotal() + (getCartTotal() >= SHIPPING_THRESHOLD ? 0 : SHIPPING_COST));
+            const labels = {
+                card: `Payer ${total}`,
+                paypal: `Payer avec PayPal`,
+                wallet: `Payer ${total}`,
+                transfer: `Confirmer la commande`
+            };
+            btn.textContent = labels[e.target.value] || `Payer ${total}`;
+        }
+    });
+
+    // Formatage carte
+    document.addEventListener('input', (e) => {
+        if (e.target.id === 'card-number') {
+            let v = e.target.value.replace(/\D/g, '').slice(0, 16);
+            e.target.value = v.replace(/(.{4})/g, '$1 ').trim();
+        }
+        if (e.target.id === 'card-exp') {
+            let v = e.target.value.replace(/\D/g, '').slice(0, 4);
+            if (v.length >= 3) v = v.slice(0, 2) + '/' + v.slice(2);
+            e.target.value = v;
+        }
+        if (e.target.id === 'card-cvc') {
+            e.target.value = e.target.value.replace(/\D/g, '').slice(0, 4);
+        }
+    });
+
+    async function processPayment(event) {
+        event.preventDefault();
+        const method = document.querySelector('input[name="payment"]:checked').value;
+        const email = document.getElementById('email').value;
+        const btn = document.getElementById('pay-btn');
+        const btnText = document.getElementById('pay-btn-text');
+        const original = btnText.textContent;
+        btn.disabled = true;
+        btnText.textContent = 'Traitement en cours...';
+
+        try {
+            // En production, vous appelez ici votre backend qui crée :
+            //   - une PaymentIntent Stripe (carte/wallet)
+            //   - une commande PayPal
+            //   - ou enregistre la commande pour virement.
+            //
+            // Le backend renvoie un client_secret (Stripe) ou une URL de redirection (PayPal).
+            //
+            // Pour cette démo, nous simulons un délai puis une confirmation locale.
+            await new Promise(r => setTimeout(r, 1500));
+
+            if (method === 'card' && stripe) {
+                // Exemple d'intégration Stripe Elements :
+                // const result = await stripe.confirmCardPayment(client_secret, {
+                //     payment_method: { card: cardElement, billing_details: { name, email } }
+                // });
+                // if (result.error) throw result.error;
+            }
+
+            // Affichage du succès
+            const orderNumber = 'OR-' + Date.now().toString().slice(-8);
+            document.getElementById('order-number').textContent = orderNumber;
+            document.getElementById('confirm-email').textContent = email;
+            document.getElementById('success-modal').style.display = 'flex';
+            clearCart();
+        } catch (err) {
+            showToast('Erreur de paiement : ' + (err.message || 'veuillez réessayer'));
+            btn.disabled = false;
+            btnText.textContent = original;
+        }
+    }
+
+    document.addEventListener('DOMContentLoaded', renderCheckout);
+</script>
+</body>
+</html>

@@ -1,0 +1,344 @@
+<!DOCTYPE html>
+<html lang="fr">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0, viewport-fit=cover">
+    <meta name="theme-color" content="#F4EFE7">
+    <title>Produit — ORAVANY</title>
+
+    <link rel="icon" type="image/png" href="assets/images/logo.png">
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Cormorant+Garamond:ital,wght@0,400;0,500;0,600;1,400;1,500&family=Cinzel:wght@400;500;600&family=Montserrat:wght@300;400;500;600;700&display=swap" rel="stylesheet">
+    <link rel="stylesheet" href="css/style.css">
+</head>
+<body data-page="produit">
+
+<div id="header-host"></div>
+
+<!-- Top : galerie + achat -->
+<section class="product-detail">
+    <div class="container">
+        <p class="breadcrumb" style="margin-bottom:2rem;">
+            <a href="index.html">Accueil</a><span class="sep">/</span>
+            <a href="boutique.html">Boutique</a><span class="sep">/</span>
+            <span id="bc-category">Produit</span>
+        </p>
+        <div id="product-content"></div>
+    </div>
+</section>
+
+<!-- Sections détaillées (signature aromatique, dégustation, origine, bienfaits, engagements, expérience) -->
+<section class="product-sections" id="product-sections"></section>
+
+<!-- Produits associés -->
+<section class="section" style="background-color: var(--color-cream-dark); padding-top:4rem; padding-bottom:4rem;">
+    <div class="container">
+        <div style="text-align:center; margin-bottom:3rem;">
+            <p class="section-eyebrow">Vous aimerez aussi</p>
+            <h2 style="font-family:var(--font-title); font-weight:400;">Notre sélection</h2>
+        </div>
+        <div class="products-grid" id="related-products"></div>
+    </div>
+</section>
+
+<div id="footer-host"></div>
+
+<script src="js/products.js"></script>
+<script src="js/script.js"></script>
+<script>
+    const productId = getQueryParam('id') || 'poivre-sauvage';
+    const product = getProduct(productId);
+
+    /* ---------- LOGO MARK (réutilisable pour titres) ---------- */
+    const LOGO_MARK_SVG = `
+        <svg viewBox="0 0 100 100" xmlns="http://www.w3.org/2000/svg" width="20" height="20" style="display:inline-block; vertical-align:middle;">
+            <g stroke="currentColor" stroke-width="2" fill="none" stroke-linecap="round">
+                <ellipse cx="50" cy="33" rx="5.5" ry="14"/>
+                <ellipse cx="50" cy="67" rx="5.5" ry="14"/>
+                <ellipse cx="33" cy="50" rx="14" ry="5.5"/>
+                <ellipse cx="67" cy="50" rx="14" ry="5.5"/>
+            </g>
+            <g fill="currentColor">
+                <circle cx="50" cy="14" r="2"/>
+                <circle cx="50" cy="86" r="2"/>
+                <circle cx="14" cy="50" r="2"/>
+                <circle cx="86" cy="50" r="2"/>
+            </g>
+        </svg>
+    `;
+
+    function renderProduct() {
+        const container = document.getElementById('product-content');
+        if (!product) {
+            container.innerHTML = `
+                <div style="text-align:center; padding:4rem 0;">
+                    <h2>Produit introuvable</h2>
+                    <p style="color:var(--color-grey); margin:1rem 0 2rem;">Le produit que vous cherchez n'existe pas ou a été retiré.</p>
+                    <a href="boutique.html" class="btn btn-primary">Retour à la boutique</a>
+                </div>
+            `;
+            return;
+        }
+
+        document.title = `${product.name} — ORAVANY`;
+        document.getElementById('bc-category').textContent = product.name;
+
+        const formatsHTML = product.formats.map((f, i) => `
+            <button class="format-option ${i === 0 ? 'active' : ''}" data-format="${f.label}" data-price="${f.price}">
+                ${f.label} — ${formatPrice(f.price)}
+            </button>
+        `).join('');
+
+        const galleryHTML = product.gallery.map((src, i) => `
+            <div class="thumb ${i === 0 ? 'active' : ''}" data-src="${src}">
+                <img src="${src}" alt="${product.name} ${i + 1}" loading="lazy">
+            </div>
+        `).join('');
+
+        container.innerHTML = `
+            <div class="product-detail-grid">
+                <div>
+                    <div class="product-gallery-main">
+                        <img id="main-image" src="${product.gallery[0]}" alt="${product.name}">
+                    </div>
+                    <div class="product-gallery-thumbs">${galleryHTML}</div>
+                </div>
+                <div class="product-info">
+                    <p class="section-eyebrow">${product.categoryLabel}</p>
+                    <h1>${product.name}</h1>
+                    <p class="latin-name">${product.latinName}</p>
+                    ${product.tagline ? `<p class="product-tagline">${product.tagline}</p>` : ''}
+                    <p class="product-info-price" id="product-price">${formatPrice(product.formats[0].price)}<span class="unit">/${product.formats[0].label}</span></p>
+                    <p class="product-info-desc">${product.heroDescription || product.longDesc || product.shortDesc}</p>
+
+                    <div class="product-options">
+                        <label class="option-label">Format</label>
+                        <div class="format-options" id="format-options">${formatsHTML}</div>
+                    </div>
+
+                    <div class="quantity-row">
+                        <div>
+                            <label class="option-label">Quantité</label>
+                            <div class="quantity-selector">
+                                <button class="qty-btn" id="qty-minus">−</button>
+                                <input type="number" class="qty-input" id="qty-input" value="1" min="1" max="99">
+                                <button class="qty-btn" id="qty-plus">+</button>
+                            </div>
+                        </div>
+                    </div>
+
+                    <div class="product-actions">
+                        <button class="btn btn-primary btn-large" id="add-to-cart">Ajouter au panier</button>
+                        <a href="checkout.html" class="btn btn-outline btn-large" id="buy-now">Acheter maintenant</a>
+                    </div>
+
+                    <div class="product-features">
+                        ${product.notes && product.notes.length ? `
+                        <div class="product-feature">
+                            <svg fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="1.5" d="M5 13l4 4L19 7"/></svg>
+                            <span>Notes aromatiques : ${product.notes.join(' · ')}</span>
+                        </div>` : ''}
+                        <div class="product-feature">
+                            <svg fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="1.5" d="M16 11V7a4 4 0 00-8 0v4M5 9h14l1 12H4L5 9z"/></svg>
+                            <span>Livraison sous 3 à 5 jours ouvrés</span>
+                        </div>
+                        <div class="product-feature">
+                            <svg fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="1.5" d="M12 15v2m-6 4h12a2 2 0 002-2v-6a2 2 0 00-2-2H6a2 2 0 00-2 2v6a2 2 0 002 2zm10-10V7a4 4 0 00-8 0v4h8z"/></svg>
+                            <span>Paiement 100% sécurisé (Stripe, PayPal, virement)</span>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        `;
+
+        setupProductInteractions();
+    }
+
+    function renderSections() {
+        if (!product) return;
+        const host = document.getElementById('product-sections');
+        const html = [];
+
+        // 1. Signature aromatique
+        if (product.aromatic) {
+            html.push(`
+                <div class="product-section">
+                    <h2>${product.aromatic.title}</h2>
+                    ${product.aromatic.intro ? `<p>${product.aromatic.intro}</p>` : ''}
+                    <ul class="styled-list">
+                        ${product.aromatic.notes.map(n => `<li>${n}</li>`).join('')}
+                    </ul>
+                    ${product.aromatic.outro ? `<p>${product.aromatic.outro}</p>` : ''}
+                </div>
+            `);
+        }
+
+        // 2. Conseils de dégustation
+        if (product.tasting) {
+            html.push(`
+                <div class="product-section">
+                    <h2>${product.tasting.title}</h2>
+                    ${product.tasting.intro ? `<p>${product.tasting.intro}</p>` : ''}
+                    <ul class="tag-list">
+                        ${product.tasting.ideal.map(i => `<li>${i}</li>`).join('')}
+                    </ul>
+                    ${product.tasting.outro ? `<p>${product.tasting.outro}</p>` : ''}
+                    ${product.tasting.tipTitle ? `
+                        <div style="margin-top:1.5rem; padding-top:1.5rem; border-top:1px solid rgba(139,107,46,0.15);">
+                            <p style="font-family:var(--font-title); font-style:italic; color:var(--color-gold); font-size:1.05rem; margin-bottom:1rem;">
+                                ${product.tasting.tipTitle}
+                            </p>
+                            <ul class="styled-list">
+                                ${product.tasting.tipList.map(t => `<li>${t}</li>`).join('')}
+                            </ul>
+                        </div>
+                    ` : ''}
+                </div>
+            `);
+        }
+
+        // 3. Origine
+        if (product.origin) {
+            html.push(`
+                <div class="product-section">
+                    <h2>Origine</h2>
+                    <div class="origin-card">
+                        <h3>${product.origin.title}</h3>
+                        <p>${product.origin.text}</p>
+                        ${product.origin.steps ? `
+                            <p style="margin-top:1.25rem; font-size:0.9rem;">${product.origin.steps.title}</p>
+                            <ol class="process-steps">
+                                ${product.origin.steps.list.map(s => `<li class="process-step"><span>${s}</span></li>`).join('')}
+                            </ol>
+                        ` : ''}
+                    </div>
+                </div>
+            `);
+        }
+
+        // 4. Bienfaits
+        if (product.benefits) {
+            html.push(`
+                <div class="product-section">
+                    <h2>${product.benefits.title}</h2>
+                    ${product.benefits.intro ? `<p>${product.benefits.intro}</p>` : ''}
+                    <ul class="styled-list">
+                        ${product.benefits.list.map(b => `<li>${b}</li>`).join('')}
+                    </ul>
+                    ${product.benefits.outro ? `<p>${product.benefits.outro}</p>` : ''}
+                </div>
+            `);
+        }
+
+        // 5. Engagements ORAVANY
+        html.push(`
+            <div class="product-section">
+                <h2>Nos engagements</h2>
+                <div class="commitments-grid">
+                    ${COMMITMENTS.map(c => `
+                        <div class="commitment-card">
+                            <span class="commitment-mark">${LOGO_MARK_SVG}</span>
+                            <h4>${c.title}</h4>
+                            <p>${c.text}</p>
+                        </div>
+                    `).join('')}
+                </div>
+            </div>
+        `);
+
+        // 6. Expérience ORAVANY (bloc final)
+        if (product.experience) {
+            html.push(`
+                <div class="product-section">
+                    <div class="experience-block">
+                        <h2>L'expérience ORAVANY</h2>
+                        <p>${product.experience}</p>
+                        <p class="experience-signature">ORAVANY — Wild Spices From Madagascar</p>
+                    </div>
+                </div>
+            `);
+        }
+
+        host.innerHTML = `<div class="container">${html.join('')}</div>`;
+    }
+
+    function setupProductInteractions() {
+        // Galerie
+        document.querySelectorAll('.thumb').forEach(thumb => {
+            thumb.addEventListener('click', () => {
+                document.querySelectorAll('.thumb').forEach(t => t.classList.remove('active'));
+                thumb.classList.add('active');
+                document.getElementById('main-image').src = thumb.dataset.src;
+            });
+        });
+
+        // Format
+        let selectedFormat = product.formats[0];
+        document.querySelectorAll('.format-option').forEach(opt => {
+            opt.addEventListener('click', () => {
+                document.querySelectorAll('.format-option').forEach(o => o.classList.remove('active'));
+                opt.classList.add('active');
+                selectedFormat = {
+                    label: opt.dataset.format,
+                    price: parseFloat(opt.dataset.price)
+                };
+                document.getElementById('product-price').innerHTML =
+                    `${formatPrice(selectedFormat.price)}<span class="unit">/${selectedFormat.label}</span>`;
+            });
+        });
+
+        // Quantité
+        const qtyInput = document.getElementById('qty-input');
+        document.getElementById('qty-minus').addEventListener('click', () => {
+            qtyInput.value = Math.max(1, parseInt(qtyInput.value) - 1);
+        });
+        document.getElementById('qty-plus').addEventListener('click', () => {
+            qtyInput.value = Math.min(99, parseInt(qtyInput.value) + 1);
+        });
+
+        // Ajout panier
+        document.getElementById('add-to-cart').addEventListener('click', () => {
+            addToCart(product.id, selectedFormat.label, parseInt(qtyInput.value));
+        });
+
+        document.getElementById('buy-now').addEventListener('click', (e) => {
+            e.preventDefault();
+            addToCart(product.id, selectedFormat.label, parseInt(qtyInput.value));
+            setTimeout(() => window.location.href = 'checkout.html', 300);
+        });
+    }
+
+    function renderRelated() {
+        const grid = document.getElementById('related-products');
+        if (!grid || !product) return;
+        const related = PRODUCTS.filter(p => p.id !== product.id).slice(0, 3);
+        grid.innerHTML = related.map(p => `
+            <article class="product-card">
+                <a href="produit.html?id=${p.id}" class="product-card-image">
+                    ${p.badge ? `<span class="product-badge">${p.badge}</span>` : ''}
+                    <img src="${p.image}" alt="${p.name}" loading="lazy">
+                </a>
+                <div class="product-card-body">
+                    <a href="produit.html?id=${p.id}">
+                        <h3 class="product-card-name">${p.name}</h3>
+                        <p class="product-card-latin">${p.latinName}</p>
+                    </a>
+                    <p class="product-card-desc">${p.shortDesc}</p>
+                    <div class="product-card-footer">
+                        <span class="product-card-price">${formatPrice(p.price)}<span class="unit">/${p.unit}</span></span>
+                        <button class="add-to-cart-btn" onclick="addToCart('${p.id}', '${p.formats[0].label}', 1)">Ajouter</button>
+                    </div>
+                </div>
+            </article>
+        `).join('');
+    }
+
+    document.addEventListener('DOMContentLoaded', () => {
+        renderProduct();
+        renderSections();
+        renderRelated();
+    });
+</script>
+</body>
+</html>

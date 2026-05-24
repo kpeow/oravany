@@ -6,7 +6,7 @@
 
 /* ---------- Header HTML (injecté dynamiquement) ---------- */
 const HEADER_HTML = `
-<div class="announcement">Livraison offerte dès 80€ d'achat — Récolte 2025 disponible</div>
+<div class="announcement">Livraison offerte dès 80€ d'achat</div>
 <header class="header" id="site-header">
     <div class="container header-inner">
         <button class="mobile-toggle" id="mobile-toggle" aria-label="Ouvrir le menu">
@@ -18,12 +18,12 @@ const HEADER_HTML = `
             <a href="notre-histoire.html" class="nav-link" data-page="notre-histoire">Notre Histoire</a>
         </nav>
         <a href="index.html" class="logo">
-            <span class="logo-mark"><svg viewBox="0 0 100 100" xmlns="http://www.w3.org/2000/svg"><ellipse class="petal" cx="50" cy="33" rx="5.5" ry="14"/><ellipse class="petal" cx="50" cy="67" rx="5.5" ry="14"/><ellipse class="petal" cx="33" cy="50" rx="14" ry="5.5"/><ellipse class="petal" cx="67" cy="50" rx="14" ry="5.5"/><circle class="dot" cx="50" cy="14" r="1.4"/><circle class="dot" cx="50" cy="86" r="1.4"/><circle class="dot" cx="14" cy="50" r="1.4"/><circle class="dot" cx="86" cy="50" r="1.4"/></svg></span>
+            <span class="logo-mark"><svg viewBox="0 0 100 100" xmlns="http://www.w3.org/2000/svg"><ellipse class="petal" cx="50" cy="33" rx="5.5" ry="14"/><ellipse class="petal" cx="50" cy="67" rx="5.5" ry="14"/><ellipse class="petal" cx="33" cy="50" rx="14" ry="5.5"/><ellipse class="petal" cx="67" cy="50" rx="14" ry="5.5"/><circle class="dot" cx="50" cy="14" r="1.5"/><circle class="dot" cx="50" cy="86" r="1.5"/><circle class="dot" cx="14" cy="50" r="1.5"/><circle class="dot" cx="86" cy="50" r="1.5"/></svg></span>
             <span class="logo-text">ORAVANY</span>
             <span class="logo-tagline">Wild Spices From Madagascar</span>
         </a>
         <nav class="nav-right">
-            <a href="boutique.html" class="nav-link" data-page="boutique-r">Épices</a>
+            <a href="journal.html" class="nav-link" data-page="journal">Journal</a>
             <a href="contact.html" class="nav-link" data-page="contact">Contact</a>
             <button class="icon-btn" aria-label="Rechercher">
                 <svg fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="1.5" d="M21 21l-5.197-5.197m0 0A7.5 7.5 0 105.196 5.196a7.5 7.5 0 0010.607 10.607z"/></svg>
@@ -31,9 +31,9 @@ const HEADER_HTML = `
             <a href="contact.html" class="icon-btn" aria-label="Mon compte">
                 <svg fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="1.5" d="M16 7a4 4 0 11-8 0 4 4 0 018 0zM12 14a7 7 0 00-7 7h14a7 7 0 00-7-7z"/></svg>
             </a>
-            <a href="panier.html" class="icon-btn" aria-label="Panier">
-                <svg fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="1.5" d="M3 3h2l.4 2M7 13h10l4-8H5.4M7 13L5.4 5M7 13l-2.293 2.293c-.63.63-.184 1.707.707 1.707H17m0 0a2 2 0 100 4 2 2 0 000-4zm-8 2a2 2 0 11-4 0 2 2 0 014 0z"/></svg>
-                <span class="cart-count hidden" id="cart-count">0</span>
+            <a href="panier.html" class="cart-link" aria-label="Panier">
+                <svg fill="none" stroke="currentColor" viewBox="0 0 24 24" width="20" height="20"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="1.5" d="M3 3h2l.4 2M7 13h10l4-8H5.4M7 13L5.4 5M7 13l-2.293 2.293c-.63.63-.184 1.707.707 1.707H17m0 0a2 2 0 100 4 2 2 0 000-4zm-8 2a2 2 0 11-4 0 2 2 0 014 0z"/></svg>
+                <span class="cart-count-text" id="cart-count">(0)</span>
             </a>
         </nav>
     </div>
@@ -42,6 +42,7 @@ const HEADER_HTML = `
     <a href="index.html" class="nav-link">Accueil</a>
     <a href="boutique.html" class="nav-link">Boutique</a>
     <a href="notre-histoire.html" class="nav-link">Notre Histoire</a>
+    <a href="journal.html" class="nav-link">Journal</a>
     <a href="contact.html" class="nav-link">Contact</a>
     <a href="panier.html" class="nav-link">Panier</a>
 </div>
@@ -54,7 +55,7 @@ const FOOTER_HTML = `
         <div class="footer-grid">
             <div class="footer-brand">
                 <a href="index.html" class="logo" style="align-items:flex-start;">
-                    <span class="logo-mark"><svg viewBox="0 0 100 100" xmlns="http://www.w3.org/2000/svg"><ellipse class="petal" cx="50" cy="33" rx="5.5" ry="14"/><ellipse class="petal" cx="50" cy="67" rx="5.5" ry="14"/><ellipse class="petal" cx="33" cy="50" rx="14" ry="5.5"/><ellipse class="petal" cx="67" cy="50" rx="14" ry="5.5"/><circle class="dot" cx="50" cy="14" r="1.4"/><circle class="dot" cx="50" cy="86" r="1.4"/><circle class="dot" cx="14" cy="50" r="1.4"/><circle class="dot" cx="86" cy="50" r="1.4"/></svg></span>
+                    <span class="logo-mark"><svg viewBox="0 0 100 100" xmlns="http://www.w3.org/2000/svg"><ellipse class="petal" cx="50" cy="33" rx="5.5" ry="14"/><ellipse class="petal" cx="50" cy="67" rx="5.5" ry="14"/><ellipse class="petal" cx="33" cy="50" rx="14" ry="5.5"/><ellipse class="petal" cx="67" cy="50" rx="14" ry="5.5"/><circle class="dot" cx="50" cy="14" r="1.5"/><circle class="dot" cx="50" cy="86" r="1.5"/><circle class="dot" cx="14" cy="50" r="1.5"/><circle class="dot" cx="86" cy="50" r="1.5"/></svg></span>
                     <span class="logo-text">ORAVANY</span>
                     <span class="logo-tagline">Wild Spices From Madagascar</span>
                 </a>
@@ -233,9 +234,7 @@ function updateCartCount() {
     const el = document.getElementById('cart-count');
     if (!el) return;
     const count = getCartCount();
-    el.textContent = count;
-    if (count > 0) el.classList.remove('hidden');
-    else el.classList.add('hidden');
+    el.textContent = `(${count})`;
 }
 
 /* ---------- Toast ---------- */
@@ -284,17 +283,17 @@ const FALLBACK_SVG = 'data:image/svg+xml;utf8,' + encodeURIComponent(`
   </defs>
   <rect width="600" height="600" fill="url(#g)"/>
   <g transform="translate(300,260)">
-    <g stroke="#8B6B2E" stroke-width="2" fill="none" stroke-linecap="round">
-      <ellipse cx="0" cy="-40" rx="16" ry="42"/>
-      <ellipse cx="0" cy="40" rx="16" ry="42"/>
-      <ellipse cx="-40" cy="0" rx="42" ry="16"/>
-      <ellipse cx="40" cy="0" rx="42" ry="16"/>
+    <g stroke="#8B6B2E" stroke-width="3" fill="none" stroke-linecap="round" stroke-linejoin="round">
+      <ellipse cx="0" cy="-50" rx="20" ry="50"/>
+      <ellipse cx="0" cy="50" rx="20" ry="50"/>
+      <ellipse cx="-50" cy="0" rx="50" ry="20"/>
+      <ellipse cx="50" cy="0" rx="50" ry="20"/>
     </g>
     <g fill="#8B6B2E">
-      <circle cx="0" cy="-95" r="3"/>
-      <circle cx="0" cy="95" r="3"/>
-      <circle cx="-95" cy="0" r="3"/>
-      <circle cx="95" cy="0" r="3"/>
+      <circle cx="0" cy="-115" r="4"/>
+      <circle cx="0" cy="115" r="4"/>
+      <circle cx="-115" cy="0" r="4"/>
+      <circle cx="115" cy="0" r="4"/>
     </g>
   </g>
   <text x="300" y="400" text-anchor="middle" fill="#8B6B2E" font-family="serif" font-size="32" letter-spacing="6">ORAVANY</text>

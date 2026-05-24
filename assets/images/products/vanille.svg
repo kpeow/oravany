@@ -62,19 +62,19 @@
     </g>
   </g>
 
-  <!-- Brand mark (logo ORAVANY fidèle) -->
+  <!-- Brand mark (croix florale ORAVANY) -->
   <g transform="translate(400 100)" opacity="0.9">
-    <g stroke="#d4b87a" stroke-width="1.5" fill="none" stroke-linecap="round">
-      <ellipse cx="0" cy="-15" rx="6" ry="16"/>
-      <ellipse cx="0" cy="15" rx="6" ry="16"/>
-      <ellipse cx="-15" cy="0" rx="16" ry="6"/>
-      <ellipse cx="15" cy="0" rx="16" ry="6"/>
+    <g stroke="#d4b87a" stroke-width="1.8" fill="none" stroke-linecap="round" stroke-linejoin="round">
+      <ellipse cx="0" cy="-18" rx="7" ry="18"/>
+      <ellipse cx="0" cy="18" rx="7" ry="18"/>
+      <ellipse cx="-18" cy="0" rx="18" ry="7"/>
+      <ellipse cx="18" cy="0" rx="18" ry="7"/>
     </g>
     <g fill="#d4b87a">
-      <circle cx="0" cy="-38" r="1.8"/>
-      <circle cx="0" cy="38" r="1.8"/>
-      <circle cx="-38" cy="0" r="1.8"/>
-      <circle cx="38" cy="0" r="1.8"/>
+      <circle cx="0" cy="-44" r="2"/>
+      <circle cx="0" cy="44" r="2"/>
+      <circle cx="-44" cy="0" r="2"/>
+      <circle cx="44" cy="0" r="2"/>
     </g>
   </g>
 
