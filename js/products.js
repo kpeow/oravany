@@ -8,7 +8,7 @@ const IMG = {
     poivreNoir: 'assets/images/products/poivre-noir.jpg',
     epicesAssorties: 'assets/images/products/epices-assorties.jpg',
     vanille: 'assets/images/products/vanille.jpg',
-    girofle: 'assets/images/products/girofle.svg',
+    girofle: 'assets/images/products/girofle.jpg',
     cannelle: 'assets/images/products/cannelle.jpg',
     riz: 'assets/images/products/riz-rouge.jpg',
     paysage: 'assets/images/products/paysage-mada.jpg',
