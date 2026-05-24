@@ -12,7 +12,11 @@ const IMG = {
     cannelle: 'assets/images/products/cannelle.jpg',
     riz: 'assets/images/products/riz-rouge.jpg',
     paysage: 'assets/images/products/paysage-mada.jpg',
-    foret: 'assets/images/products/foret.jpg'
+    foret: 'assets/images/products/foret.jpg',
+    heroPoivre: 'assets/images/products/hero-poivre.jpg',
+    recoltant: 'assets/images/products/recoltant.jpg',
+    bundle: 'assets/images/products/bundle.jpg',
+    grossiste: 'assets/images/products/grossiste.jpg'
 };
 
 const PRODUCTS = [
@@ -356,6 +360,398 @@ const PRODUCTS = [
         badge: 'Variété ancestrale',
         featured: false,
         notes: ['Fin', 'Délicat', 'Doux']
+    },
+
+    /* ============================================
+       POIVRE NOIR DE MADAGASCAR — 50 €/kg
+       ============================================ */
+    {
+        id: 'poivre-noir',
+        name: 'Poivre Noir de Madagascar',
+        latinName: 'Piper nigrum',
+        category: 'poivre-noir',
+        categoryLabel: 'Poivre noir',
+        tagline: "Le grand classique malgache aux notes chaudes et fruitées",
+        shortDesc: "Poivre noir cultivé sur la côte ouest malgache, notes boisées chaudes et finale fruitée.",
+        heroDescription: "Introduit à Madagascar au début du XXe siècle par l'agronome français Émile Prudhomme, le poivre noir de Madagascar — variété Belontoeng venue de Lampung — a trouvé dans les terres volcaniques de Nossi-Be et du Sambirano un terroir d'exception. Récolté à la main puis séché lentement au soleil, il développe une signature aromatique unique : chaude, boisée et délicatement fruitée. Chez ORAVANY, nous sélectionnons des grains denses, à forte concentration en pipérine, pour offrir un poivre rond, élégant et profondément malgache.",
+        aromatic: {
+            title: "Une signature aromatique unique",
+            intro: "Le poivre noir de Madagascar développe une palette gustative riche et nuancée :",
+            notes: [
+                "notes chaudes et boisées en attaque",
+                "fraîcheur de fruits acidulés",
+                "touches briochées et résineuses",
+                "finale gourmande légèrement piquante",
+                "longueur en bouche élégante"
+            ],
+            outro: "Un poivre noir à part — à la fois puissant et fruité — qui sublime aussi bien les viandes que les desserts."
+        },
+        tasting: {
+            title: "Conseils de dégustation",
+            intro: "À moudre au dernier moment pour préserver toute sa richesse aromatique. Idéal pour :",
+            ideal: [
+                "steaks et grillades",
+                "sauces au poivre",
+                "marinades",
+                "soupes et veloutés",
+                "salades composées",
+                "fromages affinés",
+                "fruits rouges et chocolat"
+            ]
+        },
+        origin: {
+            title: "Nossi-Be & Sambirano — Madagascar",
+            text: "Cultivé sur la côte nord-ouest malgache depuis plus d'un siècle, notre poivre noir bénéficie d'un climat chaud et humide idéal pour développer ses arômes. La variété Belontoeng, introduite depuis Lampung en Indonésie au début du XXe siècle, s'est parfaitement acclimatée aux terres volcaniques de la région."
+        },
+        benefits: {
+            title: "Bienfaits naturels",
+            intro: "Le poivre noir est naturellement reconnu pour ses nombreuses propriétés :",
+            list: [
+                "riche en pipérine, aux vertus anti-inflammatoires",
+                "favorise la digestion et régule l'appétit",
+                "source de minéraux : potassium, phosphore, magnésium, fer",
+                "apporte vitamines B, C et K",
+                "améliore l'absorption des nutriments"
+            ],
+            outro: "Utilisé depuis des siècles dans les traditions culinaires et médicinales, il était autrefois utilisé pour faire baisser la fièvre grâce à son action stimulante sur la transpiration."
+        },
+        experience: "Le poivre noir ORAVANY incarne l'élégance d'un classique sublimé. Une épice incontournable du quotidien, issue d'un terroir d'exception, qui transforme chaque plat en moment de plaisir authentique.",
+        price: 5.00,
+        unit: '100g',
+        formats: [
+            { label: '100g', price: 5.00 },
+            { label: '250g', price: 12.50 },
+            { label: '500g', price: 24.00 }
+        ],
+        image: IMG.poivreNoir,
+        gallery: [IMG.poivreNoir, IMG.epicesAssorties, IMG.foret, IMG.paysage],
+        badge: 'Nouveau',
+        featured: false,
+        notes: ['Boisé', 'Fruité', 'Chaud']
+    },
+
+    /* ============================================
+       BUNDLE 1 — Découverte (Poivre Noir + Poivrier)
+       ============================================ */
+    {
+        id: 'bundle-decouverte',
+        name: 'Bundle Découverte',
+        latinName: 'Poivre noir 100g + poivrier acacia',
+        category: 'bundles',
+        categoryLabel: 'Bundles',
+        tagline: "L'initiation parfaite à l'art du poivre malgache",
+        shortDesc: "100g de poivre noir de Madagascar + un poivrier en bois d'acacia — l'essentiel pour démarrer.",
+        heroDescription: "Le Bundle Découverte ORAVANY réunit l'essentiel pour révéler tout l'art du poivre malgache : 100g de notre Poivre Noir de Madagascar (variété Belontoeng cultivée à Nossi-Be) accompagné d'un poivrier manuel en bois d'acacia naturel, équipé d'un mécanisme en acier carbone réglable. Conçu comme un véritable rituel sensoriel, ce duo permet de moudre votre poivre à la minute pour préserver toute sa richesse aromatique. Une porte d'entrée idéale dans l'univers ORAVANY, à offrir ou à s'offrir.",
+        aromatic: {
+            title: "Le geste qui change tout",
+            intro: "Moudre soi-même, juste avant de servir, c'est :",
+            notes: [
+                "libérer instantanément les huiles essentielles",
+                "préserver les notes volatiles les plus fines",
+                "ajuster la mouture selon vos plats",
+                "transformer un geste utile en rituel sensoriel",
+                "découvrir la vraie identité aromatique du poivre"
+            ],
+            outro: "Le mécanisme en acier carbone du poivrier offre une mouture précise et durable, du grain entier au plus fin."
+        },
+        tasting: {
+            title: "Composition du bundle",
+            intro: "Votre coffret contient :",
+            ideal: [
+                "1 boîte 100g de Poivre Noir de Madagascar",
+                "1 poivrier manuel bois d'acacia (18 cm)",
+                "Mécanisme acier carbone réglable",
+                "Livret de dégustation ORAVANY",
+                "Emballage cadeau premium"
+            ]
+        },
+        origin: {
+            title: "Un savoir-faire à 360°",
+            text: "Le poivre est récolté à la main à Madagascar par nos producteurs partenaires. Le poivrier est fabriqué en bois d'acacia issu de forêts gérées durablement (FSC), pour un objet noble, robuste et écoresponsable qui vous accompagnera de longues années."
+        },
+        benefits: {
+            title: "Pourquoi ce bundle ?",
+            intro: "Le duo poivre + poivrier ORAVANY, c'est :",
+            list: [
+                "économie vs achat séparé",
+                "expérience sensorielle complète",
+                "cadeau gourmand et durable",
+                "introduction parfaite à notre maison",
+                "produit prêt à offrir, en emballage soigné"
+            ],
+            outro: "Un cadeau de fin d'année, anniversaire, crémaillère, mariage… Le geste juste pour les amateurs de cuisine."
+        },
+        experience: "Le Bundle Découverte ORAVANY transforme un geste du quotidien en moment de raffinement. L'art de moudre son poivre devient un rituel, le poivre noir de Madagascar révèle toute sa noblesse — et chaque plat raconte une histoire.",
+        price: 39.00,
+        unit: 'coffret',
+        formats: [
+            { label: 'Coffret', price: 39.00 }
+        ],
+        image: IMG.bundle,
+        gallery: [IMG.bundle, IMG.poivreNoir, IMG.epicesAssorties, IMG.foret],
+        badge: 'Cadeau',
+        featured: false,
+        notes: ['Bundle', 'Cadeau', 'Complet']
+    },
+
+    /* ============================================
+       BUNDLE 2 — Prestige (Poivre Sauvage + Poivrier)
+       ============================================ */
+    {
+        id: 'bundle-prestige',
+        name: 'Bundle Prestige',
+        latinName: 'Poivre sauvage 100g + poivrier acacia premium',
+        category: 'bundles',
+        categoryLabel: 'Bundles',
+        tagline: "L'or noir sauvage et son écrin",
+        shortDesc: "100g de Voatsiperifery, le poivre sauvage le plus rare au monde, + un poivrier acacia premium.",
+        heroDescription: "Le Bundle Prestige ORAVANY est dédié aux amateurs et aux fins gourmets : 100g de Poivre Sauvage Voatsiperifery — récolté à la main sur les lianes des forêts primaires de Madagascar — accompagné d'un poivrier manuel haut de gamme en bois d'acacia certifié FSC, avec mécanisme en acier carbone à mouture réglable. Une expérience d'exception, pensée comme un cadeau précieux. Idéal pour les chefs, les épicuriens, les passionnés de gastronomie ou simplement pour s'offrir le luxe de l'authentique.",
+        aromatic: {
+            title: "Le poivre le plus rare au monde",
+            intro: "Le Voatsiperifery développe une palette aromatique unique :",
+            notes: [
+                "notes boisées profondes",
+                "fraîcheur végétale",
+                "touches florales délicates",
+                "finale légèrement citronnée",
+                "longueur en bouche intense et élégante"
+            ],
+            outro: "À moudre à la dernière minute pour révéler chaque note. Sublime sur les viandes, poissons, fruits exotiques et chocolat noir."
+        },
+        tasting: {
+            title: "Composition du bundle",
+            intro: "Votre coffret prestige contient :",
+            ideal: [
+                "1 boîte 100g de Poivre Sauvage Voatsiperifery",
+                "1 poivrier manuel bois d'acacia premium (20 cm)",
+                "Mécanisme acier carbone à mouture réglable",
+                "Livret de dégustation signé ORAVANY",
+                "Emballage cadeau noble et soigné"
+            ]
+        },
+        origin: {
+            title: "Rareté et savoir-faire",
+            text: "Le Voatsiperifery pousse exclusivement à l'état sauvage sur des lianes pouvant atteindre 20 mètres, dans les forêts tropicales du sud-est de Madagascar. Sa récolte manuelle exigeante en fait l'un des poivres les plus rares au monde. Le poivrier qui l'accompagne, en acacia FSC, est fabriqué pour durer une vie."
+        },
+        benefits: {
+            title: "Pour qui ?",
+            intro: "Ce bundle prestige est conçu pour :",
+            list: [
+                "les amateurs de gastronomie",
+                "les chefs et passionnés de cuisine",
+                "les cadeaux haut de gamme",
+                "les épicuriens à la recherche de rareté",
+                "les amoureux de l'authentique"
+            ],
+            outro: "Un cadeau qui marque, qui raconte une histoire, et qui se transmet."
+        },
+        experience: "Le Bundle Prestige ORAVANY incarne l'excellence : la rareté d'un poivre d'exception, sublimée par l'élégance d'un poivrier en bois noble. Un duo précieux, pensé pour celles et ceux qui placent la cuisine au rang d'art.",
+        price: 59.00,
+        unit: 'coffret',
+        formats: [
+            { label: 'Coffret', price: 59.00 }
+        ],
+        image: IMG.bundle,
+        gallery: [IMG.bundle, IMG.poivreSauvage, IMG.foret, IMG.recoltant],
+        badge: 'Prestige',
+        featured: false,
+        notes: ['Rare', 'Cadeau', 'Premium']
+    },
+
+    /* ============================================
+       BUNDLE 3 — Coffret Dégustation (3 poivres)
+       ============================================ */
+    {
+        id: 'bundle-degustation',
+        name: 'Coffret Dégustation',
+        latinName: 'Voatsiperifery + Poivre noir + Poivrier',
+        category: 'bundles',
+        categoryLabel: 'Bundles',
+        tagline: "Le voyage complet, des forêts au moulin",
+        shortDesc: "100g Voatsiperifery + 100g Poivre noir + poivrier acacia premium — le coffret signature.",
+        heroDescription: "Le Coffret Dégustation ORAVANY rassemble l'essence de notre maison : 100g de Poivre Sauvage Voatsiperifery et 100g de Poivre Noir de Madagascar, accompagnés d'un poivrier en bois d'acacia premium pour les sublimer. Deux poivres aux signatures opposées et complémentaires — l'un rare et floral, l'autre noble et fruité — pour explorer toute la richesse aromatique du terroir malgache. Un cadeau exceptionnel, à offrir à un proche ou à savourer pour soi.",
+        aromatic: {
+            title: "Deux poivres, deux univers",
+            intro: "Une dégustation comparée à travers :",
+            notes: [
+                "le Voatsiperifery — boisé, citronné, floral",
+                "le Poivre noir — fruité, briochée, résineux",
+                "deux mouture conseillées : grossière puis fine",
+                "deux moments : sur viande blanche puis viande rouge",
+                "un livret de dégustation pour vous guider"
+            ],
+            outro: "Une véritable expérience gustative à partager — autour d'une table, en cuisine, ou comme un rituel personnel."
+        },
+        tasting: {
+            title: "Composition du coffret",
+            intro: "Votre coffret signature contient :",
+            ideal: [
+                "1 boîte 100g de Poivre Sauvage Voatsiperifery",
+                "1 boîte 100g de Poivre Noir de Madagascar",
+                "1 poivrier manuel acacia premium (20 cm)",
+                "Livret de dégustation complet",
+                "Coffret cadeau noble"
+            ]
+        },
+        origin: {
+            title: "Le meilleur des deux mondes",
+            text: "Le Voatsiperifery vient des forêts primaires du sud-est malgache, cueilli à la main. Le poivre noir est cultivé à Nossi-Be et au Sambirano selon des méthodes héritées d'un siècle de tradition. Deux terroirs, deux histoires, un même engagement qualité."
+        },
+        benefits: {
+            title: "Le cadeau ultime",
+            intro: "Ce coffret est conçu pour :",
+            list: [
+                "les passionnés de gastronomie",
+                "les cadeaux d'exception",
+                "les amateurs de découvertes sensorielles",
+                "les fêtes de fin d'année",
+                "les chefs et amateurs avertis"
+            ],
+            outro: "Un coffret qui se garde, qui se partage et qui se savoure."
+        },
+        experience: "Le Coffret Dégustation ORAVANY est l'invitation au voyage par excellence. Deux poivres, deux histoires, un même savoir-faire — l'âme aromatique de Madagascar, condensée en un coffret précieux.",
+        price: 79.00,
+        unit: 'coffret',
+        formats: [
+            { label: 'Coffret', price: 79.00 }
+        ],
+        image: IMG.bundle,
+        gallery: [IMG.bundle, IMG.poivreSauvage, IMG.poivreNoir, IMG.recoltant],
+        badge: 'Signature',
+        featured: true,
+        notes: ['Découverte', 'Premium', 'Cadeau']
+    },
+
+    /* ============================================
+       GROSSISTE 1 — Poivre Noir au kilo
+       ============================================ */
+    {
+        id: 'grossiste-poivre-noir',
+        name: 'Poivre Noir — Tarif Grossiste',
+        latinName: 'Piper nigrum · Vente en gros',
+        category: 'grossiste',
+        categoryLabel: 'Grossiste',
+        tagline: "Le poivre noir de Madagascar pour les professionnels",
+        shortDesc: "Poivre noir au kilo avec tarifs dégressifs jusqu'à -25%, livré directement de notre atelier d'Antananarivo.",
+        heroDescription: "ORAVANY accompagne restaurateurs, épiceries fines, traiteurs et revendeurs avec une offre dédiée aux professionnels. Notre poivre noir de Madagascar (variété Belontoeng cultivée à Nossi-Be) est disponible en formats grossiste avec des tarifs dégressifs avantageux. Conditionné sous vide dans des sacs alimentaires premium, livré directement depuis notre atelier d'Antananarivo, traçable jusqu'au village producteur. Une qualité constante, une provenance maîtrisée et une relation directe sans intermédiaire.",
+        aromatic: {
+            title: "Une qualité professionnelle constante",
+            intro: "Pour vos clients exigeants, nous garantissons :",
+            notes: [
+                "lots homogènes et traçables",
+                "calibrage rigoureux des grains",
+                "humidité contrôlée < 12%",
+                "taux de pipérine certifié",
+                "conditionnement sous vide premium"
+            ],
+            outro: "Chaque lot est testé en laboratoire avant expédition."
+        },
+        tasting: {
+            title: "Tarifs dégressifs",
+            intro: "Plus vous commandez, plus le prix au kilo baisse :",
+            ideal: [
+                "1 kg : 45 € (au lieu de 50 €) — économie 10 %",
+                "2 kg : 85 € (42,50 €/kg) — économie 15 %",
+                "5 kg : 200 € (40 €/kg) — économie 20 %",
+                "10 kg : 375 € (37,50 €/kg) — économie 25 %"
+            ],
+            outro: "Pour commandes supérieures à 10 kg ou récurrentes, contactez-nous pour un devis personnalisé."
+        },
+        origin: {
+            title: "Direct producteur — Madagascar",
+            text: "Nous travaillons sans intermédiaire avec des coopératives de petits producteurs malgaches du Sambirano. Cette relation directe nous permet de proposer des tarifs justes pour les professionnels tout en garantissant une rémunération équitable aux récoltants."
+        },
+        benefits: {
+            title: "Les avantages ORAVANY Pro",
+            intro: "Pour les professionnels :",
+            list: [
+                "livraison sous 5 à 7 jours ouvrés",
+                "factures HT avec mentions légales complètes",
+                "frais de port offerts dès 5 kg",
+                "interlocuteur dédié",
+                "possibilité d'abonnement mensuel"
+            ],
+            outro: "Pour toute demande spécifique (échantillon, marque blanche, conditionnement personnalisé), écrivez-nous à contact@oravany.com."
+        },
+        experience: "ORAVANY Pro, c'est l'engagement d'une qualité d'exception, livrée directement depuis Madagascar, à un tarif respectueux du producteur comme du professionnel. Un partenariat de confiance, pensé pour la régularité.",
+        price: 45.00,
+        unit: '1kg',
+        formats: [
+            { label: '1 kg', price: 45.00 },
+            { label: '2 kg', price: 85.00 },
+            { label: '5 kg', price: 200.00 },
+            { label: '10 kg', price: 375.00 }
+        ],
+        image: IMG.grossiste,
+        gallery: [IMG.grossiste, IMG.poivreNoir, IMG.recoltant, IMG.foret],
+        badge: 'Pro -25%',
+        featured: false,
+        notes: ['Professionnel', 'Dégressif', 'Direct producteur']
+    },
+
+    /* ============================================
+       GROSSISTE 2 — Poivre Sauvage au kilo
+       ============================================ */
+    {
+        id: 'grossiste-poivre-sauvage',
+        name: 'Poivre Sauvage Voatsiperifery — Tarif Grossiste',
+        latinName: 'Piper borbonense · Vente en gros',
+        category: 'grossiste',
+        categoryLabel: 'Grossiste',
+        tagline: "Le poivre le plus rare au monde, pour les professionnels d'exception",
+        shortDesc: "Voatsiperifery au kilo avec tarifs dégressifs jusqu'à -20%, réservé aux professionnels.",
+        heroDescription: "Pour les chefs étoilés, les épiceries fines de luxe, les traiteurs gastronomiques et les distributeurs spécialisés, ORAVANY propose une offre dédiée au Poivre Sauvage Voatsiperifery en formats grossiste. Cueilli à la main dans les forêts primaires de Madagascar, ce poivre rarissime est conditionné sous vide pour préserver tous ses arômes. Livraison directe depuis Antananarivo, traçabilité totale, qualité d'exception.",
+        aromatic: {
+            title: "Une rareté pour les professionnels exigeants",
+            intro: "Notre poivre sauvage Voatsiperifery grossiste, c'est :",
+            notes: [
+                "récolte 100% manuelle en forêt primaire",
+                "lots de petite production, traçables",
+                "calibrage premium des baies",
+                "conditionnement sous vide hermétique",
+                "préservation maximale des huiles essentielles"
+            ],
+            outro: "Une qualité gastronomique, à un volume professionnel."
+        },
+        tasting: {
+            title: "Tarifs dégressifs",
+            intro: "Tarifs réservés aux professionnels avec K-bis :",
+            ideal: [
+                "1 kg : 90 € (au lieu de 100 €) — économie 10 %",
+                "2 kg : 170 € (85 €/kg) — économie 15 %",
+                "5 kg : 400 € (80 €/kg) — économie 20 %"
+            ],
+            outro: "Quantités limitées en raison de la rareté de la récolte. Réservation conseillée."
+        },
+        origin: {
+            title: "Forêts primaires du sud-est malgache",
+            text: "Notre poivre sauvage Voatsiperifery est exclusivement cueilli dans des zones forestières préservées du sud-est de Madagascar. Sa récolte sur les lianes — pouvant atteindre 20 mètres — reste artisanale et dépendante des saisons. Une rareté que nous partageons avec les professionnels qui sauront la sublimer."
+        },
+        benefits: {
+            title: "ORAVANY Pro Voatsiperifery",
+            intro: "Pour les professionnels d'exception :",
+            list: [
+                "récolte limitée et exclusive",
+                "livraison soignée sous 7 à 10 jours",
+                "certificat d'origine fourni",
+                "interlocuteur dédié",
+                "support marketing (visuels, fiches descriptives)"
+            ],
+            outro: "Pour un partenariat exclusif ou un volume supérieur à 5 kg, contactez directement notre direction commerciale."
+        },
+        experience: "Proposer le Voatsiperifery dans votre établissement, c'est offrir à vos clients un voyage sensoriel d'exception. Une signature aromatique unique, une rareté qui se savoure, un terroir qui se raconte.",
+        price: 90.00,
+        unit: '1kg',
+        formats: [
+            { label: '1 kg', price: 90.00 },
+            { label: '2 kg', price: 170.00 },
+            { label: '5 kg', price: 400.00 }
+        ],
+        image: IMG.grossiste,
+        gallery: [IMG.grossiste, IMG.poivreSauvage, IMG.heroPoivre, IMG.recoltant],
+        badge: 'Pro Rare',
+        featured: false,
+        notes: ['Rare', 'Professionnel', 'Exclusif']
     }
 ];
 

@@ -75,11 +75,12 @@ const FOOTER_HTML = `
             <div>
                 <h4 class="footer-title">Boutique</h4>
                 <div class="footer-links">
-                    <a href="boutique.html?cat=poivres">Poivres sauvages</a>
+                    <a href="boutique.html?cat=poivres">Poivre sauvage</a>
+                    <a href="boutique.html?cat=poivre-noir">Poivre noir</a>
                     <a href="boutique.html?cat=vanille">Vanille Bourbon</a>
                     <a href="boutique.html?cat=epices">Épices rares</a>
-                    <a href="boutique.html?cat=riz">Riz d'exception</a>
-                    <a href="boutique.html">Tous nos produits</a>
+                    <a href="boutique.html?cat=bundles">Bundles & coffrets</a>
+                    <a href="boutique.html?cat=grossiste">Grossiste</a>
                 </div>
             </div>
             <div>
