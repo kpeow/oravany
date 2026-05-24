@@ -4,7 +4,7 @@
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0, viewport-fit=cover">
     <meta name="theme-color" content="#F4EFE7">
-    <meta name="description" content="Boutique ORAVANY — Découvrez notre sélection de poivres sauvages, vanille Bourbon, épices rares et riz d'exception de Madagascar.">
+    <meta name="description" content="Boutique ORAVANY — Sélection de poivres sauvages, vanille Bourbon premium, épices rares et coffrets cadeaux de Madagascar.">
     <title>Boutique — ORAVANY</title>
 
     <link rel="icon" type="image/png" href="assets/images/logo.png">
@@ -14,30 +14,210 @@
     <link rel="stylesheet" href="css/style.css">
 
     <style>
-        .filters {
+        /* ============ Boutique - style premium inspiré maquette ============ */
+        .shop-toolbar {
             display: flex;
-            justify-content: center;
+            align-items: center;
+            justify-content: space-between;
+            gap: 2rem;
             flex-wrap: wrap;
-            gap: 0.5rem;
             margin-bottom: 3rem;
+            padding-bottom: 1.5rem;
+            border-bottom: 1px solid rgba(139, 107, 46, 0.15);
         }
-        .filter-btn {
-            padding: 0.7rem 1.5rem;
-            border: 1px solid var(--color-grey-light);
-            background-color: var(--color-white);
-            font-size: 0.75rem;
-            letter-spacing: 0.2em;
-            text-transform: uppercase;
+        .filters-inline {
+            display: flex;
+            gap: 2.5rem;
+            flex-wrap: wrap;
+        }
+        .filter-link {
+            background: none;
+            border: none;
+            font-family: var(--font-title);
+            font-size: 1.15rem;
             color: var(--color-black);
             cursor: pointer;
-            transition: all var(--transition);
-            border-radius: 2px;
+            padding: 0.25rem 0;
+            position: relative;
+            transition: color var(--transition);
+            letter-spacing: 0.02em;
         }
-        .filter-btn:hover { border-color: var(--color-gold); color: var(--color-gold); }
-        .filter-btn.active {
-            background-color: var(--color-green);
+        .filter-link::after {
+            content: '';
+            position: absolute;
+            bottom: -4px;
+            left: 0;
+            right: 0;
+            height: 1px;
+            background-color: var(--color-gold);
+            transform: scaleX(0);
+            transform-origin: left;
+            transition: transform var(--transition);
+        }
+        .filter-link:hover { color: var(--color-gold); }
+        .filter-link.active {
+            color: var(--color-gold);
+            font-style: italic;
+        }
+        .filter-link.active::after { transform: scaleX(1); }
+
+        .sort-select {
+            display: inline-flex;
+            align-items: center;
+            gap: 0.75rem;
+            background: var(--color-white);
+            padding: 0.7rem 1.2rem;
+            border: 1px solid rgba(139, 107, 46, 0.2);
+            border-radius: 2px;
+            font-size: 0.85rem;
+            color: var(--color-grey);
+            cursor: pointer;
+        }
+        .sort-select select {
+            border: none;
+            background: none;
+            font-family: var(--font-text);
+            font-size: 0.85rem;
+            color: var(--color-black);
+            cursor: pointer;
+            outline: none;
+            padding-right: 1rem;
+        }
+
+        /* Cartes produits premium */
+        .shop-grid {
+            display: grid;
+            grid-template-columns: repeat(4, 1fr);
+            gap: 2rem 1.75rem;
+        }
+        @media (max-width: 1100px) { .shop-grid { grid-template-columns: repeat(3, 1fr); } }
+        @media (max-width: 800px) { .shop-grid { grid-template-columns: repeat(2, 1fr); } }
+        @media (max-width: 480px) { .shop-grid { grid-template-columns: 1fr; gap: 2rem; } }
+
+        .shop-card {
+            background: transparent;
+            display: flex;
+            flex-direction: column;
+            position: relative;
+            transition: transform var(--transition);
+        }
+        .shop-card:hover { transform: translateY(-4px); }
+
+        .shop-card-image {
+            position: relative;
+            aspect-ratio: 1;
+            overflow: hidden;
+            background-color: var(--color-cream-dark);
+            border-radius: 2px;
+            margin-bottom: 1.25rem;
+        }
+        .shop-card-image img {
+            width: 100%;
+            height: 100%;
+            object-fit: cover;
+            transition: transform 0.8s ease;
+        }
+        .shop-card:hover .shop-card-image img { transform: scale(1.04); }
+
+        .shop-badge {
+            position: absolute;
+            top: 0.85rem;
+            left: 0.85rem;
+            background-color: rgba(74, 51, 30, 0.92);
             color: var(--color-cream);
-            border-color: var(--color-green);
+            font-size: 0.65rem;
+            letter-spacing: 0.2em;
+            text-transform: uppercase;
+            padding: 0.4rem 0.85rem;
+            border-radius: 2px;
+            backdrop-filter: blur(4px);
+            -webkit-backdrop-filter: blur(4px);
+            font-weight: 500;
+            z-index: 2;
+        }
+        .shop-badge--phare { background-color: rgba(74, 51, 30, 0.92); }
+        .shop-badge--nouveau { background-color: rgba(46, 59, 47, 0.92); }
+        .shop-badge--rare { background-color: rgba(139, 107, 46, 0.92); }
+        .shop-badge--bio { background-color: rgba(46, 59, 47, 0.92); }
+
+        .shop-card-quick {
+            position: absolute;
+            bottom: 0.85rem;
+            right: 0.85rem;
+            width: 40px;
+            height: 40px;
+            background-color: var(--color-cream);
+            color: var(--color-black);
+            border-radius: 50%;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            cursor: pointer;
+            transition: all var(--transition);
+            opacity: 0;
+            transform: translateY(8px);
+            z-index: 2;
+            box-shadow: 0 4px 12px rgba(0,0,0,0.15);
+        }
+        .shop-card:hover .shop-card-quick {
+            opacity: 1;
+            transform: translateY(0);
+        }
+        .shop-card-quick:hover {
+            background-color: var(--color-gold);
+            color: var(--color-white);
+        }
+        .shop-card-quick svg { width: 18px; height: 18px; }
+
+        .shop-card-info {
+            padding: 0 0.25rem;
+        }
+        .shop-card-name {
+            font-family: var(--font-title);
+            font-weight: 400;
+            font-size: 1.3rem;
+            margin-bottom: 0.35rem;
+            line-height: 1.3;
+            color: var(--color-black);
+        }
+        .shop-card-name a { color: inherit; }
+        .shop-card-name a:hover { color: var(--color-gold); }
+
+        .shop-card-latin {
+            font-family: var(--font-title);
+            font-style: italic;
+            color: var(--color-grey);
+            font-size: 0.85rem;
+            margin-bottom: 0.5rem;
+        }
+
+        .shop-card-price {
+            font-family: var(--font-text);
+            font-size: 0.85rem;
+            color: var(--color-black);
+            letter-spacing: 0.02em;
+        }
+        .shop-card-price strong {
+            font-family: var(--font-title);
+            font-size: 1.05rem;
+            font-weight: 500;
+            color: var(--color-gold);
+            margin-left: 0.25rem;
+        }
+
+        /* Empty state */
+        .shop-empty {
+            grid-column: 1/-1;
+            text-align: center;
+            padding: 5rem 1rem;
+            color: var(--color-grey);
+        }
+        .shop-empty p { font-family: var(--font-title); font-style: italic; font-size: 1.15rem; }
+
+        @media (max-width: 700px) {
+            .shop-toolbar { gap: 1rem; }
+            .filters-inline { gap: 1.5rem; }
+            .filter-link { font-size: 1rem; }
         }
     </style>
 </head>
@@ -49,22 +229,36 @@
     <div class="container">
         <p class="breadcrumb"><a href="index.html">Accueil</a><span class="sep">/</span>Boutique</p>
         <h1>Notre Boutique</h1>
-        <p style="color:var(--color-grey); max-width:600px; margin:1rem auto 0;">
-            Découvrez l'ensemble de notre collection : poivres sauvages, vanille Bourbon, épices rares et riz d'exception, sélectionnés au cœur des terroirs malgaches.
+        <p style="color:var(--color-grey); max-width:620px; margin:1rem auto 0; font-style:italic; font-family:var(--font-title); font-size:1.1rem;">
+            La sélection ORAVANY : poivres sauvages, vanille Bourbon premium, épices rares et coffrets cadeaux d'exception.
         </p>
     </div>
 </section>
 
 <section class="section" style="padding-top: 1rem;">
     <div class="container">
-        <div class="filters" id="filters">
-            <button class="filter-btn active" data-cat="all">Tout</button>
-            <button class="filter-btn" data-cat="poivres">Poivres sauvages</button>
-            <button class="filter-btn" data-cat="vanille">Vanille</button>
-            <button class="filter-btn" data-cat="epices">Épices rares</button>
-            <button class="filter-btn" data-cat="riz">Riz</button>
+
+        <div class="shop-toolbar">
+            <div class="filters-inline" id="filters">
+                <button class="filter-link active" data-cat="all">Tous</button>
+                <button class="filter-link" data-cat="poivres">Poivres</button>
+                <button class="filter-link" data-cat="vanille">Vanille</button>
+                <button class="filter-link" data-cat="epices">Épices</button>
+                <button class="filter-link" data-cat="riz">Riz</button>
+                <button class="filter-link" data-cat="coffrets">Coffrets</button>
+            </div>
+            <div class="sort-select">
+                <span>Trier par :</span>
+                <select id="sort-select">
+                    <option value="default">Nouveautés</option>
+                    <option value="price-asc">Prix croissant</option>
+                    <option value="price-desc">Prix décroissant</option>
+                    <option value="name">Nom A-Z</option>
+                </select>
+            </div>
         </div>
-        <div class="products-grid" id="products-grid"></div>
+
+        <div class="shop-grid" id="shop-grid"></div>
     </div>
 </section>
 
@@ -74,47 +268,77 @@
 <script src="js/script.js"></script>
 <script>
     let currentCategory = getQueryParam('cat') || 'all';
+    let currentSort = 'default';
+
+    function getMinPrice(p) {
+        return Math.min(...p.formats.map(f => f.price));
+    }
+
+    function getSorted(list) {
+        const sorted = [...list];
+        if (currentSort === 'price-asc') sorted.sort((a, b) => getMinPrice(a) - getMinPrice(b));
+        else if (currentSort === 'price-desc') sorted.sort((a, b) => getMinPrice(b) - getMinPrice(a));
+        else if (currentSort === 'name') sorted.sort((a, b) => a.name.localeCompare(b.name, 'fr'));
+        return sorted;
+    }
+
+    function badgeClass(badge) {
+        if (!badge) return '';
+        const b = badge.toLowerCase();
+        if (b.includes('phare')) return 'shop-badge--phare';
+        if (b.includes('nouveau') || b.includes('récolte') || b.includes('recolte')) return 'shop-badge--nouveau';
+        if (b.includes('rare') || b.includes('édition') || b.includes('edition')) return 'shop-badge--rare';
+        if (b.includes('bio') || b.includes('gourmet')) return 'shop-badge--bio';
+        return '';
+    }
 
     function renderProducts() {
-        const grid = document.getElementById('products-grid');
+        const grid = document.getElementById('shop-grid');
         if (!grid) return;
-        const list = getProductsByCategory(currentCategory);
+        let list = getProductsByCategory(currentCategory);
+        list = getSorted(list);
 
         if (list.length === 0) {
-            grid.innerHTML = `<p style="grid-column:1/-1; text-align:center; color:var(--color-grey); padding:3rem;">Aucun produit dans cette catégorie pour le moment.</p>`;
+            grid.innerHTML = `<div class="shop-empty"><p>Aucun produit dans cette catégorie pour le moment.</p></div>`;
             return;
         }
 
-        grid.innerHTML = list.map(p => `
-            <article class="product-card">
-                <a href="produit.html?id=${p.id}" class="product-card-image">
-                    ${p.badge ? `<span class="product-badge">${p.badge}</span>` : ''}
-                    <img src="${p.image}" alt="${p.name}" loading="lazy">
-                </a>
-                <div class="product-card-body">
-                    <a href="produit.html?id=${p.id}">
-                        <h3 class="product-card-name">${p.name}</h3>
-                        <p class="product-card-latin">${p.latinName}</p>
-                    </a>
-                    <p class="product-card-desc">${p.shortDesc}</p>
-                    <div class="product-card-footer">
-                        <span class="product-card-price">${formatPrice(p.price)}<span class="unit">/${p.unit}</span></span>
-                        <button class="add-to-cart-btn" onclick="addToCart('${p.id}', '${p.formats[0].label}', 1)">Ajouter</button>
+        grid.innerHTML = list.map(p => {
+            const minPrice = getMinPrice(p);
+            const cls = badgeClass(p.badge);
+            return `
+                <article class="shop-card">
+                    <div class="shop-card-image">
+                        ${p.badge ? `<span class="shop-badge ${cls}">${p.badge}</span>` : ''}
+                        <a href="produit.html?id=${p.id}">
+                            <img src="${p.image}" alt="${p.name}" loading="lazy">
+                        </a>
+                        <button class="shop-card-quick" title="Ajout rapide au panier"
+                                onclick="addToCart('${p.id}', '${p.formats[0].label}', 1)">
+                            <svg fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                                <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M3 3h2l.4 2M7 13h10l4-8H5.4M7 13L5.4 5M7 13l-2.293 2.293c-.63.63-.184 1.707.707 1.707H17m0 0a2 2 0 100 4 2 2 0 000-4zm-8 2a2 2 0 11-4 0 2 2 0 014 0z"/>
+                            </svg>
+                        </button>
                     </div>
-                </div>
-            </article>
-        `).join('');
+                    <div class="shop-card-info">
+                        <h3 class="shop-card-name"><a href="produit.html?id=${p.id}">${p.name}</a></h3>
+                        <p class="shop-card-latin">${p.latinName}</p>
+                        <p class="shop-card-price">À partir de <strong>${formatPrice(minPrice)}</strong></p>
+                    </div>
+                </article>
+            `;
+        }).join('');
     }
 
     document.addEventListener('DOMContentLoaded', () => {
-        // Activer le filtre courant
-        document.querySelectorAll('.filter-btn').forEach(btn => {
+        // Activate current filter
+        document.querySelectorAll('.filter-link').forEach(btn => {
             if (btn.dataset.cat === currentCategory) {
-                document.querySelectorAll('.filter-btn').forEach(b => b.classList.remove('active'));
+                document.querySelectorAll('.filter-link').forEach(b => b.classList.remove('active'));
                 btn.classList.add('active');
             }
             btn.addEventListener('click', () => {
-                document.querySelectorAll('.filter-btn').forEach(b => b.classList.remove('active'));
+                document.querySelectorAll('.filter-link').forEach(b => b.classList.remove('active'));
                 btn.classList.add('active');
                 currentCategory = btn.dataset.cat;
                 const url = new URL(window.location);
@@ -124,6 +348,13 @@
                 renderProducts();
             });
         });
+
+        // Sort
+        document.getElementById('sort-select').addEventListener('change', (e) => {
+            currentSort = e.target.value;
+            renderProducts();
+        });
+
         renderProducts();
     });
 </script>

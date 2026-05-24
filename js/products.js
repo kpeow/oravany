@@ -2,14 +2,14 @@
    ORAVANY — Catalogue produits (fiches premium détaillées)
    ========================================================= */
 
-// Images locales (4 SVG illustratifs ORAVANY + 5 photographies)
+// Images locales — photos premium ORAVANY
 const IMG = {
-    poivreSauvage: 'assets/images/products/poivre-sauvage.svg',
+    poivreSauvage: 'assets/images/products/poivre-sauvage.jpg',
     poivreNoir: 'assets/images/products/poivre-noir.jpg',
     epicesAssorties: 'assets/images/products/epices-assorties.jpg',
-    vanille: 'assets/images/products/vanille.svg',
+    vanille: 'assets/images/products/vanille.jpg',
     girofle: 'assets/images/products/girofle.svg',
-    cannelle: 'assets/images/products/cannelle.svg',
+    cannelle: 'assets/images/products/cannelle.jpg',
     riz: 'assets/images/products/riz-rouge.jpg',
     paysage: 'assets/images/products/paysage-mada.jpg',
     foret: 'assets/images/products/foret.jpg'
@@ -67,16 +67,16 @@ const PRODUCTS = [
             outro: "Grâce à sa richesse en pipérine, il participe également à une meilleure absorption de certains nutriments."
         },
         experience: "Plus qu'une épice, le poivre sauvage ORAVANY est une invitation au voyage. Une immersion sensorielle dans les forêts de Madagascar, où la nature, le savoir-faire humain et la rareté se rencontrent pour donner naissance à une épice d'exception.",
-        price: 22.00,
+        price: 5.50,
         unit: '50g',
         formats: [
-            { label: '50g', price: 22.00 },
-            { label: '100g', price: 39.00 },
-            { label: '250g', price: 89.00 }
+            { label: '50g', price: 5.50 },
+            { label: '100g', price: 10.00 },
+            { label: '250g', price: 23.50 }
         ],
         image: IMG.poivreSauvage,
         gallery: [IMG.poivreSauvage, IMG.poivreNoir, IMG.epicesAssorties, IMG.foret],
-        badge: 'Édition rare',
+        badge: 'Phare',
         featured: true,
         notes: ['Boisé', 'Citronné', 'Floral']
     },
@@ -142,12 +142,12 @@ const PRODUCTS = [
             outro: "Sa richesse aromatique permet également de réduire l'utilisation de sucres ou d'arômes artificiels."
         },
         experience: "La vanille ORAVANY est une immersion dans l'âme de Madagascar. Une épice précieuse née du temps, du climat tropical et du savoir-faire humain, offrant une expérience gustative raffinée et profondément authentique.",
-        price: 28.00,
-        unit: '10 gousses',
+        price: 4.50,
+        unit: '5 gousses',
         formats: [
-            { label: '5 gousses', price: 16.00 },
-            { label: '10 gousses', price: 28.00 },
-            { label: '25 gousses', price: 62.00 }
+            { label: '5 gousses', price: 4.50 },
+            { label: '10 gousses', price: 8.00 },
+            { label: '25 gousses', price: 18.50 }
         ],
         image: IMG.vanille,
         gallery: [IMG.vanille, IMG.epicesAssorties, IMG.foret, IMG.paysage],

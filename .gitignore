@@ -1,0 +1,43 @@
+# ============================
+#   ORAVANY — .gitignore
+# ============================
+
+# Système Windows
+Thumbs.db
+ehthumbs.db
+Desktop.ini
+$RECYCLE.BIN/
+
+# Système macOS
+.DS_Store
+.AppleDouble
+.LSOverride
+
+# Éditeurs de code
+.vscode/
+.idea/
+*.swp
+*.swo
+*~
+
+# Fichiers temporaires
+*.tmp
+*.bak
+*.log
+
+# Backups de migration (locaux uniquement)
+_BACKUP_*.tar.gz
+_BACKUP_*.zip
+*_backup.*
+
+# Cache navigateur / build
+.cache/
+node_modules/
+
+# Variables d'environnement (clés API, secrets)
+.env
+.env.local
+.env.production
+
+# Fichiers de configuration Claude / Cowork
+.claude/
