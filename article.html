@@ -1,0 +1,351 @@
+<!DOCTYPE html>
+<html lang="fr">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0, viewport-fit=cover">
+    <meta name="theme-color" content="#F4EFE7">
+    <title>Article, ORAVANY</title>
+
+    <link rel="icon" type="image/png" href="assets/images/logo.png">
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Cormorant+Garamond:ital,wght@0,400;0,500;0,600;1,400;1,500&family=Cinzel:wght@400;500;600&family=Montserrat:wght@300;400;500;600;700&display=swap" rel="stylesheet">
+    <link rel="stylesheet" href="css/style.css">
+
+    <style>
+        /* ============ Article, mise en page magazine ============ */
+        .article-hero {
+            margin-top: var(--header-height);
+            padding: 4rem 0 0;
+            text-align: center;
+            background-color: var(--color-cream);
+        }
+        .article-hero-inner {
+            max-width: 760px;
+            margin: 0 auto;
+            padding: 0 1.5rem;
+        }
+        .article-meta {
+            font-size: 0.75rem;
+            letter-spacing: 0.3em;
+            text-transform: uppercase;
+            color: var(--color-gold);
+            margin-bottom: 1.5rem;
+        }
+        .article-meta .sep { margin: 0 0.6rem; opacity: 0.5; }
+        .article-title {
+            font-family: var(--font-title);
+            font-weight: 400;
+            font-size: clamp(2rem, 4.5vw, 3.5rem);
+            line-height: 1.15;
+            color: var(--color-black);
+            margin-bottom: 1.5rem;
+        }
+        .article-cover {
+            margin: 3rem auto 0;
+            max-width: 1100px;
+            padding: 0 1.5rem;
+        }
+        .article-cover img {
+            width: 100%;
+            aspect-ratio: 21/9;
+            object-fit: cover;
+            border-radius: 4px;
+        }
+
+        .article-body {
+            max-width: 720px;
+            margin: 0 auto;
+            padding: 4rem 1.5rem;
+            font-family: var(--font-text);
+            color: var(--color-black);
+            font-size: 1.05rem;
+            line-height: 1.85;
+        }
+        .article-body .article-lead {
+            font-family: var(--font-title);
+            font-style: italic;
+            font-size: 1.4rem;
+            line-height: 1.55;
+            color: var(--color-grey);
+            margin-bottom: 2.5rem;
+            padding-bottom: 2.5rem;
+            border-bottom: 1px solid rgba(139, 107, 46, 0.2);
+        }
+        .article-body h2 {
+            font-family: var(--font-title);
+            font-weight: 500;
+            font-size: 1.75rem;
+            color: var(--color-black);
+            margin: 2.5rem 0 1.25rem;
+            line-height: 1.3;
+        }
+        .article-body h2::before {
+            content: '';
+            display: inline-block;
+            width: 30px;
+            height: 1px;
+            background-color: var(--color-gold);
+            vertical-align: middle;
+            margin-right: 0.75rem;
+            margin-bottom: 0.4rem;
+        }
+        .article-body p {
+            margin-bottom: 1.25rem;
+            color: var(--color-black);
+            opacity: 0.85;
+        }
+        .article-body p strong {
+            font-weight: 600;
+            color: var(--color-black);
+            opacity: 1;
+        }
+        .article-body em {
+            font-style: italic;
+            color: var(--color-gold);
+        }
+        .article-list {
+            list-style: none;
+            margin: 1.5rem 0;
+            padding: 0;
+        }
+        .article-list li {
+            position: relative;
+            padding: 0.4rem 0 0.4rem 1.5rem;
+            line-height: 1.7;
+        }
+        .article-list li::before {
+            content: '';
+            position: absolute;
+            left: 0;
+            top: 1rem;
+            width: 6px;
+            height: 6px;
+            border: 1px solid var(--color-gold);
+            transform: rotate(45deg);
+        }
+
+        .article-callout {
+            margin: 2.5rem 0;
+            padding: 2rem 2.25rem;
+            background-color: var(--color-cream-dark);
+            border-left: 3px solid var(--color-gold);
+            border-radius: 2px;
+        }
+        .article-callout-label {
+            font-family: var(--font-text);
+            font-size: 0.7rem;
+            letter-spacing: 0.25em;
+            text-transform: uppercase;
+            color: var(--color-gold);
+            margin-bottom: 0.5rem;
+            font-weight: 600;
+        }
+        .article-callout p:last-child {
+            margin-bottom: 0;
+            font-family: var(--font-title);
+            font-style: italic;
+            font-size: 1.1rem;
+            line-height: 1.6;
+            color: var(--color-black);
+        }
+
+        /* Bloc produit lié */
+        .article-product-cta {
+            background-color: var(--color-green);
+            color: var(--color-cream);
+            margin: 4rem 0 0;
+            padding: 3rem 0;
+        }
+        .article-product-cta-inner {
+            max-width: 900px;
+            margin: 0 auto;
+            padding: 0 1.5rem;
+            display: grid;
+            grid-template-columns: 1fr 1.3fr;
+            gap: 3rem;
+            align-items: center;
+        }
+        @media (max-width: 700px) {
+            .article-product-cta-inner { grid-template-columns: 1fr; gap: 2rem; text-align: center; }
+        }
+        .article-product-image {
+            aspect-ratio: 1;
+            overflow: hidden;
+            border-radius: 4px;
+        }
+        .article-product-image img {
+            width: 100%;
+            height: 100%;
+            object-fit: cover;
+        }
+        .article-product-eyebrow {
+            font-size: 0.7rem;
+            letter-spacing: 0.3em;
+            text-transform: uppercase;
+            color: var(--color-gold-light);
+            margin-bottom: 1rem;
+        }
+        .article-product-name {
+            font-family: var(--font-title);
+            font-weight: 400;
+            font-size: 1.8rem;
+            margin-bottom: 1rem;
+            color: var(--color-cream);
+        }
+        .article-product-desc {
+            opacity: 0.9;
+            margin-bottom: 1.5rem;
+            line-height: 1.8;
+        }
+
+        /* Articles connexes */
+        .related-section {
+            padding: 5rem 0;
+            background-color: var(--color-cream-dark);
+        }
+        .related-section h2 {
+            text-align: center;
+            font-family: var(--font-title);
+            font-weight: 400;
+            font-style: italic;
+            margin-bottom: 3rem;
+        }
+        .related-grid {
+            max-width: 1100px;
+            margin: 0 auto;
+            padding: 0 1.5rem;
+            display: grid;
+            grid-template-columns: repeat(3, 1fr);
+            gap: 2rem;
+        }
+        @media (max-width: 800px) { .related-grid { grid-template-columns: 1fr; } }
+
+        .related-card {
+            background-color: var(--color-white);
+            border-radius: 4px;
+            overflow: hidden;
+            box-shadow: var(--shadow-soft);
+            transition: all var(--transition);
+            display: flex;
+            flex-direction: column;
+        }
+        .related-card:hover {
+            transform: translateY(-4px);
+            box-shadow: var(--shadow-hover);
+        }
+        .related-card-image { aspect-ratio: 4 / 3; overflow: hidden; }
+        .related-card-image img { width: 100%; height: 100%; object-fit: cover; transition: transform 0.8s ease; }
+        .related-card:hover .related-card-image img { transform: scale(1.05); }
+        .related-card-body { padding: 1.5rem; }
+        .related-card-meta {
+            font-size: 0.65rem;
+            letter-spacing: 0.25em;
+            text-transform: uppercase;
+            color: var(--color-gold);
+            margin-bottom: 0.5rem;
+        }
+        .related-card-title {
+            font-family: var(--font-title);
+            font-weight: 400;
+            font-size: 1.15rem;
+            line-height: 1.4;
+            color: var(--color-black);
+        }
+        .related-card-title a:hover { color: var(--color-gold); }
+
+        .article-error {
+            margin-top: var(--header-height);
+            padding: 6rem 1.5rem;
+            text-align: center;
+        }
+        .article-error h2 { font-family: var(--font-title); margin-bottom: 1rem; }
+        .article-error p { color: var(--color-grey); margin-bottom: 2rem; }
+    </style>
+</head>
+<body data-page="journal">
+
+<div id="header-host"></div>
+
+<div id="article-host"></div>
+
+<div id="footer-host"></div>
+
+<script src="js/products.js"></script>
+<script src="js/articles.js"></script>
+<script src="js/script.js"></script>
+<script>
+    const articleId = getQueryParam('id');
+    const article = articleId ? getArticle(articleId) : null;
+
+    function renderArticle() {
+        const host = document.getElementById('article-host');
+
+        if (!article) {
+            host.innerHTML = `
+                <div class="article-error">
+                    <h2>Article introuvable</h2>
+                    <p>L'article que vous cherchez n'existe pas ou a été déplacé.</p>
+                    <a href="journal.html" class="btn btn-primary">Retour au Journal</a>
+                </div>
+            `;
+            return;
+        }
+
+        document.title = article.title + ', ORAVANY, Journal';
+        const product = article.relatedProduct ? getProduct(article.relatedProduct) : null;
+        const related = getRelatedArticles(article.id, 3);
+
+        host.innerHTML = `
+            <header class="article-hero">
+                <div class="article-hero-inner">
+                    <p class="breadcrumb"><a href="index.html">Accueil</a><span class="sep">/</span><a href="journal.html">Journal</a><span class="sep">/</span>${article.category}</p>
+                    <p class="article-meta" style="margin-top: 2rem;">${article.category}<span class="sep">·</span>${article.readTime} de lecture</p>
+                    <h1 class="article-title">${article.title}</h1>
+                </div>
+                <div class="article-cover">
+                    <img src="${article.image}" alt="${article.title}">
+                </div>
+            </header>
+
+            <article class="article-body">${article.content}</article>
+
+            ${product ? `
+                <section class="article-product-cta">
+                    <div class="article-product-cta-inner">
+                        <div class="article-product-image">
+                            <img src="${product.image}" alt="${product.name}">
+                        </div>
+                        <div>
+                            <p class="article-product-eyebrow">Le produit de cet article</p>
+                            <h2 class="article-product-name">${product.name}</h2>
+                            <p class="article-product-desc">${product.shortDesc || ''}</p>
+                            <a href="produit.html?id=${product.id}" class="btn btn-outline" style="color:var(--color-gold-light); border-color:var(--color-gold-light);">Découvrir ce produit</a>
+                        </div>
+                    </div>
+                </section>
+            ` : ''}
+
+            <section class="related-section">
+                <h2>À lire également</h2>
+                <div class="related-grid">
+                    ${related.map(a => `
+                        <article class="related-card">
+                            <a href="article.html?id=${a.id}" class="related-card-image">
+                                <img src="${a.image}" alt="${a.title}" loading="lazy">
+                            </a>
+                            <div class="related-card-body">
+                                <p class="related-card-meta">${a.category}<span style="margin:0 0.5rem; opacity:0.5;">·</span>${a.readTime}</p>
+                                <h3 class="related-card-title"><a href="article.html?id=${a.id}">${a.title}</a></h3>
+                            </div>
+                        </article>
+                    `).join('')}
+                </div>
+            </section>
+        `;
+    }
+
+    document.addEventListener('DOMContentLoaded', renderArticle);
+</script>
+</body>
+</html>

@@ -68,6 +68,8 @@
             margin-bottom: 0.75rem;
             color: var(--color-black);
         }
+        .article-title a { color: inherit; }
+        .article-title a:hover { color: var(--color-gold); }
         .article-excerpt {
             color: var(--color-grey);
             font-size: 0.9rem;
@@ -113,93 +115,7 @@
 
 <section class="section" style="padding-top:2rem;">
     <div class="container">
-        <div class="journal-grid">
-
-            <article class="article-card">
-                <div class="article-image">
-                    <img src="assets/images/products/hero-poivre.jpg" alt="Récolte du poivre Voatsiperifery">
-                </div>
-                <div class="article-body">
-                    <p class="article-meta">Reportage · 8 min de lecture</p>
-                    <h2 class="article-title">Au cœur des forêts du Voatsiperifery</h2>
-                    <p class="article-excerpt">
-                        Une immersion dans les forêts primaires du sud-est de Madagascar, à la rencontre des cueilleurs qui perpétuent une tradition séculaire, récolter, à 15 mètres de hauteur, le plus rare des poivres sauvages.
-                    </p>
-                    <a href="#" class="article-link">Lire l'article →</a>
-                </div>
-            </article>
-
-            <article class="article-card">
-                <div class="article-image">
-                    <img src="assets/images/products/vanille.jpg" alt="Affinage de la vanille Bourbon">
-                </div>
-                <div class="article-body">
-                    <p class="article-meta">Savoir-faire · 6 min de lecture</p>
-                    <h2 class="article-title">Les 9 mois d'affinage de la vanille Bourbon</h2>
-                    <p class="article-excerpt">
-                        Échaudage, étuvage, séchage au soleil, mise en malle… Découvrez les étapes patientes qui transforment une gousse verte en l'une des épices les plus précieuses au monde.
-                    </p>
-                    <a href="#" class="article-link">Lire l'article →</a>
-                </div>
-            </article>
-
-            <article class="article-card">
-                <div class="article-image">
-                    <img src="assets/images/products/epices-assorties.jpg" alt="Dégustation d'épices">
-                </div>
-                <div class="article-body">
-                    <p class="article-meta">Dégustation · 5 min de lecture</p>
-                    <h2 class="article-title">L'art de marier le Voatsiperifery</h2>
-                    <p class="article-excerpt">
-                        Notes boisées, fraîcheur citronnée, finale florale… Cinq accords parfaits pour révéler toute la complexité de notre poivre signature, du chocolat noir au poisson noble.
-                    </p>
-                    <a href="#" class="article-link">Lire l'article →</a>
-                </div>
-            </article>
-
-            <article class="article-card">
-                <div class="article-image">
-                    <img src="assets/images/products/paysage-mada.jpg" alt="Région SAVA de Madagascar">
-                </div>
-                <div class="article-body">
-                    <p class="article-meta">Terroir · 7 min de lecture</p>
-                    <h2 class="article-title">SAVA, berceau de la vanille mondiale</h2>
-                    <p class="article-excerpt">
-                        Au nord-est de l'île, quatre régions, Sambava, Antalaha, Vohémar, Andapa, concentrent à elles seules 80 % de la production mondiale de vanille. Histoire d'un terroir d'exception.
-                    </p>
-                    <a href="#" class="article-link">Lire l'article →</a>
-                </div>
-            </article>
-
-            <article class="article-card">
-                <div class="article-image">
-                    <img src="assets/images/products/cannelle.jpg" alt="Bâtons de cannelle">
-                </div>
-                <div class="article-body">
-                    <p class="article-meta">Conseils · 4 min de lecture</p>
-                    <h2 class="article-title">Cannelle de Ceylan vs casse : reconnaître la vraie</h2>
-                    <p class="article-excerpt">
-                        Toutes les "cannelles" ne se valent pas. Apprenez à distinguer la vraie cannelle (Cinnamomum verum), fine, claire, multi-feuilletée, de sa cousine plus rustique, la casse.
-                    </p>
-                    <a href="#" class="article-link">Lire l'article →</a>
-                </div>
-            </article>
-
-            <article class="article-card">
-                <div class="article-image">
-                    <img src="assets/images/products/riz-rouge.jpg" alt="Cuisine malgache">
-                </div>
-                <div class="article-body">
-                    <p class="article-meta">Recette · 12 min de lecture</p>
-                    <h2 class="article-title">Romazava aux épices ORAVANY</h2>
-                    <p class="article-excerpt">
-                        Le plat national malgache revisité avec nos épices premium. Une recette transmise par nos producteurs partenaires, à savourer en famille.
-                    </p>
-                    <a href="#" class="article-link">Lire la recette →</a>
-                </div>
-            </article>
-
-        </div>
+        <div class="journal-grid" id="journal-grid"></div>
 
         <div class="coming-soon">
             <p style="font-family:var(--font-title); font-style:italic; color:var(--color-gold); font-size:1.2rem; margin-bottom:0.5rem;">
@@ -215,6 +131,25 @@
 <div id="footer-host"></div>
 
 <script src="js/products.js"></script>
+<script src="js/articles.js"></script>
 <script src="js/script.js"></script>
+<script>
+    document.addEventListener('DOMContentLoaded', () => {
+        const grid = document.getElementById('journal-grid');
+        grid.innerHTML = ARTICLES.map(a => `
+            <article class="article-card">
+                <a href="article.html?id=${a.id}" class="article-image">
+                    <img src="${a.image}" alt="${a.title}" loading="lazy">
+                </a>
+                <div class="article-body">
+                    <p class="article-meta">${a.category}<span style="margin:0 0.5rem; opacity:0.5;">·</span>${a.readTime} de lecture</p>
+                    <h2 class="article-title"><a href="article.html?id=${a.id}">${a.title}</a></h2>
+                    <p class="article-excerpt">${a.excerpt}</p>
+                    <a href="article.html?id=${a.id}" class="article-link">Lire l'article →</a>
+                </div>
+            </article>
+        `).join('');
+    });
+</script>
 </body>
 </html>

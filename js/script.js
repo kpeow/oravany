@@ -25,7 +25,7 @@ const HEADER_HTML = `
         <nav class="nav-right">
             <a href="journal.html" class="nav-link" data-page="journal">Journal</a>
             <a href="contact.html" class="nav-link" data-page="contact">Contact</a>
-            <button class="icon-btn" aria-label="Rechercher">
+            <button class="icon-btn" id="search-toggle" aria-label="Rechercher">
                 <svg fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="1.5" d="M21 21l-5.197-5.197m0 0A7.5 7.5 0 105.196 5.196a7.5 7.5 0 0010.607 10.607z"/></svg>
             </button>
             <a href="contact.html" class="icon-btn" aria-label="Mon compte">
@@ -45,6 +45,33 @@ const HEADER_HTML = `
     <a href="journal.html" class="nav-link">Journal</a>
     <a href="contact.html" class="nav-link">Contact</a>
     <a href="panier.html" class="nav-link">Panier</a>
+</div>
+
+<!-- Overlay de recherche -->
+<div class="search-overlay" id="search-overlay" aria-hidden="true">
+    <div class="search-overlay-inner">
+        <button class="search-close" id="search-close" aria-label="Fermer">
+            <svg fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="1.5" d="M6 18L18 6M6 6l12 12"/></svg>
+        </button>
+        <div class="search-container">
+            <p class="search-label">Que cherchez-vous ?</p>
+            <div class="search-input-wrapper">
+                <svg class="search-icon" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="1.5" d="M21 21l-5.197-5.197m0 0A7.5 7.5 0 105.196 5.196a7.5 7.5 0 0010.607 10.607z"/></svg>
+                <input type="text" id="search-input" class="search-input" placeholder="Poivre, vanille, recette..." autocomplete="off">
+            </div>
+            <div class="search-results" id="search-results"></div>
+            <div class="search-suggestions" id="search-suggestions">
+                <p class="search-suggestions-label">Suggestions populaires</p>
+                <div class="search-tags">
+                    <button class="search-tag" data-query="voatsiperifery">Voatsiperifery</button>
+                    <button class="search-tag" data-query="vanille">Vanille Bourbon</button>
+                    <button class="search-tag" data-query="bundle">Bundles cadeau</button>
+                    <button class="search-tag" data-query="grossiste">Tarif grossiste</button>
+                    <button class="search-tag" data-query="recette">Recettes</button>
+                </div>
+            </div>
+        </div>
+    </div>
 </div>
 `;
 
@@ -272,6 +299,114 @@ function getQueryParam(name) {
     return new URLSearchParams(window.location.search).get(name);
 }
 
+/* ---------- Recherche (overlay) ---------- */
+function setupSearch() {
+    const toggle = document.getElementById('search-toggle');
+    const overlay = document.getElementById('search-overlay');
+    const close = document.getElementById('search-close');
+    const input = document.getElementById('search-input');
+    const results = document.getElementById('search-results');
+    const suggestions = document.getElementById('search-suggestions');
+
+    if (!toggle || !overlay) return;
+
+    const openOverlay = () => {
+        overlay.classList.add('open');
+        overlay.setAttribute('aria-hidden', 'false');
+        document.body.style.overflow = 'hidden';
+        setTimeout(() => input.focus(), 100);
+    };
+    const closeOverlay = () => {
+        overlay.classList.remove('open');
+        overlay.setAttribute('aria-hidden', 'true');
+        document.body.style.overflow = '';
+        input.value = '';
+        results.innerHTML = '';
+        suggestions.style.display = '';
+    };
+
+    toggle.addEventListener('click', openOverlay);
+    close.addEventListener('click', closeOverlay);
+    overlay.addEventListener('click', (e) => { if (e.target === overlay) closeOverlay(); });
+    document.addEventListener('keydown', (e) => { if (e.key === 'Escape' && overlay.classList.contains('open')) closeOverlay(); });
+
+    // Suggestions cliquables
+    overlay.querySelectorAll('.search-tag').forEach(tag => {
+        tag.addEventListener('click', () => {
+            input.value = tag.dataset.query;
+            input.dispatchEvent(new Event('input'));
+        });
+    });
+
+    // Recherche en temps réel
+    input.addEventListener('input', () => {
+        const q = input.value.trim().toLowerCase();
+        if (q.length < 2) {
+            results.innerHTML = '';
+            suggestions.style.display = '';
+            return;
+        }
+        suggestions.style.display = 'none';
+        const matchedProducts = (typeof PRODUCTS !== 'undefined' ? PRODUCTS : []).filter(p => {
+            const haystack = [
+                p.name, p.latinName, p.categoryLabel, p.shortDesc, p.tagline,
+                (p.notes || []).join(' ')
+            ].join(' ').toLowerCase();
+            return haystack.includes(q);
+        });
+        const matchedArticles = (typeof ARTICLES !== 'undefined' ? ARTICLES : []).filter(a => {
+            const haystack = [a.title, a.excerpt, a.category, a.content].join(' ').toLowerCase();
+            return haystack.includes(q);
+        });
+
+        if (matchedProducts.length === 0 && matchedArticles.length === 0) {
+            results.innerHTML = `
+                <p class="search-empty">Aucun résultat pour "<strong>${q}</strong>".</p>
+                <p class="search-empty-sub">Essayez avec un autre mot ou explorez notre <a href="boutique.html">boutique</a>.</p>
+            `;
+            return;
+        }
+
+        let html = '';
+        if (matchedProducts.length > 0) {
+            html += `<p class="search-section-title">Produits (${matchedProducts.length})</p>`;
+            html += '<div class="search-results-list">';
+            matchedProducts.forEach(p => {
+                const minPrice = Math.min(...p.formats.map(f => f.price));
+                html += `
+                    <a href="produit.html?id=${p.id}" class="search-result">
+                        <div class="search-result-image"><img src="${p.image}" alt="${p.name}"></div>
+                        <div class="search-result-info">
+                            <p class="search-result-meta">${p.categoryLabel}</p>
+                            <h3 class="search-result-name">${p.name}</h3>
+                            <p class="search-result-price">À partir de ${formatPrice(minPrice)}</p>
+                        </div>
+                    </a>
+                `;
+            });
+            html += '</div>';
+        }
+        if (matchedArticles.length > 0) {
+            html += `<p class="search-section-title">Journal (${matchedArticles.length})</p>`;
+            html += '<div class="search-results-list">';
+            matchedArticles.forEach(a => {
+                html += `
+                    <a href="article.html?id=${a.id}" class="search-result">
+                        <div class="search-result-image"><img src="${a.image}" alt="${a.title}"></div>
+                        <div class="search-result-info">
+                            <p class="search-result-meta">${a.category} · ${a.readTime}</p>
+                            <h3 class="search-result-name">${a.title}</h3>
+                            <p class="search-result-excerpt">${a.excerpt.slice(0, 100)}...</p>
+                        </div>
+                    </a>
+                `;
+            });
+            html += '</div>';
+        }
+        results.innerHTML = html;
+    });
+}
+
 /* ---------- Image fallback ---------- */
 // Image SVG inline stylisée (motif épice ORAVANY) en cas d'échec de chargement
 const FALLBACK_SVG = 'data:image/svg+xml;utf8,' + encodeURIComponent(`
@@ -331,5 +466,6 @@ function setupImageFallback() {
 /* ---------- Init ---------- */
 document.addEventListener('DOMContentLoaded', () => {
     renderLayout();
+    setupSearch();
     setupImageFallback();
 });
