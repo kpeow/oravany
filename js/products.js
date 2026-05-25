@@ -431,17 +431,17 @@ const PRODUCTS = [
     },
 
     /* ============================================
-       BUNDLE 1, Découverte (Poivre Noir + Poivrier)
+       BUNDLE UNIQUE, Poivre Sauvage + Poivrier (15€)
        ============================================ */
     {
-        id: 'bundle-decouverte',
-        name: 'Bundle Découverte',
-        latinName: 'Poivre noir 100g + poivrier acacia',
+        id: 'bundle-poivre-poivrier',
+        name: 'Bundle Poivre Sauvage + Poivrier',
+        latinName: 'Voatsiperifery + poivrier acacia premium',
         category: 'bundles',
         categoryLabel: 'Bundles',
-        tagline: "L'initiation parfaite à l'art du poivre malgache",
-        shortDesc: "100g de poivre noir de Madagascar + un poivrier en bois d'acacia, l'essentiel pour démarrer.",
-        heroDescription: "Le Bundle Découverte ORAVANY réunit l'essentiel pour révéler tout l'art du poivre malgache : 100g de notre Poivre Noir de Madagascar (variété Belontoeng cultivée à Nossi-Be) accompagné d'un poivrier manuel en bois d'acacia naturel, équipé d'un mécanisme en acier carbone réglable. Conçu comme un véritable rituel sensoriel, ce duo permet de moudre votre poivre à la minute pour préserver toute sa richesse aromatique. Une porte d'entrée idéale dans l'univers ORAVANY, à offrir ou à s'offrir.",
+        tagline: "L'or noir sauvage et son écrin",
+        shortDesc: "Notre poivre sauvage Voatsiperifery accompagné d'un poivrier en bois d'acacia premium, choisissez votre format.",
+        heroDescription: "Le Bundle ORAVANY réunit l'essentiel pour révéler toute la magie du poivre sauvage de Madagascar : notre Voatsiperifery, cueilli à la main sur les lianes des forêts primaires, accompagné d'un poivrier manuel en bois d'acacia certifié FSC, équipé d'un mécanisme en acier carbone à mouture réglable. Choisissez la quantité de poivre adaptée à vos envies : 50g pour découvrir, 100g pour s'installer dans le rituel, 250g pour ne plus s'en passer. Conçu comme un véritable rituel sensoriel, ce duo permet de moudre votre poivre à la minute pour préserver toute sa richesse aromatique.",
         aromatic: {
             title: "Le geste qui change tout",
             intro: "Moudre soi-même, juste avant de servir, c'est :",
@@ -458,16 +458,22 @@ const PRODUCTS = [
             title: "Composition du bundle",
             intro: "Votre coffret contient :",
             ideal: [
-                "1 boîte 100g de Poivre Noir de Madagascar",
-                "1 poivrier manuel bois d'acacia (18 cm)",
-                "Mécanisme acier carbone réglable",
-                "Livret de dégustation ORAVANY",
-                "Emballage cadeau premium"
+                "1 boîte de Poivre Sauvage Voatsiperifery (50g, 100g ou 250g selon votre choix)",
+                "1 poivrier manuel en bois d'acacia premium (20 cm)",
+                "Mécanisme acier carbone à mouture réglable",
+                "Livret de dégustation signé ORAVANY",
+                "Emballage cadeau noble et soigné"
+            ],
+            tipTitle: "Choisir son format",
+            tipList: [
+                "50g + poivrier — l'idéal pour découvrir",
+                "100g + poivrier — le bon équilibre quotidien",
+                "250g + poivrier — pour les amateurs avertis"
             ]
         },
         origin: {
             title: "Un savoir-faire à 360°",
-            text: "Le poivre est récolté à la main à Madagascar par nos producteurs partenaires. Le poivrier est fabriqué en bois d'acacia issu de forêts gérées durablement (FSC), pour un objet noble, robuste et écoresponsable qui vous accompagnera de longues années."
+            text: "Le poivre sauvage Voatsiperifery est cueilli à la main dans les forêts tropicales du sud-est de Madagascar, sur des lianes pouvant atteindre 20 mètres. Le poivrier qui l'accompagne est fabriqué en bois d'acacia certifié FSC (forêts gérées durablement), pour un objet noble, robuste et écoresponsable qui vous accompagnera de longues années."
         },
         benefits: {
             title: "Pourquoi ce bundle ?",
@@ -475,151 +481,25 @@ const PRODUCTS = [
             list: [
                 "économie vs achat séparé",
                 "expérience sensorielle complète",
-                "cadeau gourmand et durable",
-                "introduction parfaite à notre maison",
+                "cadeau gourmand, durable et signé",
+                "introduction parfaite à l'univers ORAVANY",
                 "produit prêt à offrir, en emballage soigné"
             ],
             outro: "Un cadeau de fin d'année, anniversaire, crémaillère, mariage… Le geste juste pour les amateurs de cuisine."
         },
-        experience: "Le Bundle Découverte ORAVANY transforme un geste du quotidien en moment de raffinement. L'art de moudre son poivre devient un rituel, le poivre noir de Madagascar révèle toute sa noblesse, et chaque plat raconte une histoire.",
-        price: 39.00,
-        unit: 'coffret',
+        experience: "Le Bundle ORAVANY transforme un geste du quotidien en moment de raffinement. L'art de moudre son poivre devient un rituel, le Voatsiperifery révèle toute sa noblesse, et chaque plat raconte une histoire.",
+        price: 19.90,
+        unit: '50g + poivrier',
         formats: [
-            { label: 'Coffret', price: 39.00 }
-        ],
-        image: IMG.bundle,
-        gallery: [IMG.bundle, IMG.poivreNoir, IMG.epicesAssorties, IMG.foret],
-        badge: 'Cadeau',
-        featured: false,
-        notes: ['Bundle', 'Cadeau', 'Complet']
-    },
-
-    /* ============================================
-       BUNDLE 2, Prestige (Poivre Sauvage + Poivrier)
-       ============================================ */
-    {
-        id: 'bundle-prestige',
-        name: 'Bundle Prestige',
-        latinName: 'Poivre sauvage 100g + poivrier acacia premium',
-        category: 'bundles',
-        categoryLabel: 'Bundles',
-        tagline: "L'or noir sauvage et son écrin",
-        shortDesc: "100g de Voatsiperifery, le poivre sauvage le plus rare au monde, + un poivrier acacia premium.",
-        heroDescription: "Le Bundle Prestige ORAVANY est dédié aux amateurs et aux fins gourmets : 100g de Poivre Sauvage Voatsiperifery, récolté à la main sur les lianes des forêts primaires de Madagascar, accompagné d'un poivrier manuel haut de gamme en bois d'acacia certifié FSC, avec mécanisme en acier carbone à mouture réglable. Une expérience d'exception, pensée comme un cadeau précieux. Idéal pour les chefs, les épicuriens, les passionnés de gastronomie ou simplement pour s'offrir le luxe de l'authentique.",
-        aromatic: {
-            title: "Le poivre le plus rare au monde",
-            intro: "Le Voatsiperifery développe une palette aromatique unique :",
-            notes: [
-                "notes boisées profondes",
-                "fraîcheur végétale",
-                "touches florales délicates",
-                "finale légèrement citronnée",
-                "longueur en bouche intense et élégante"
-            ],
-            outro: "À moudre à la dernière minute pour révéler chaque note. Sublime sur les viandes, poissons, fruits exotiques et chocolat noir."
-        },
-        tasting: {
-            title: "Composition du bundle",
-            intro: "Votre coffret prestige contient :",
-            ideal: [
-                "1 boîte 100g de Poivre Sauvage Voatsiperifery",
-                "1 poivrier manuel bois d'acacia premium (20 cm)",
-                "Mécanisme acier carbone à mouture réglable",
-                "Livret de dégustation signé ORAVANY",
-                "Emballage cadeau noble et soigné"
-            ]
-        },
-        origin: {
-            title: "Rareté et savoir-faire",
-            text: "Le Voatsiperifery pousse exclusivement à l'état sauvage sur des lianes pouvant atteindre 20 mètres, dans les forêts tropicales du sud-est de Madagascar. Sa récolte manuelle exigeante en fait l'un des poivres les plus rares au monde. Le poivrier qui l'accompagne, en acacia FSC, est fabriqué pour durer une vie."
-        },
-        benefits: {
-            title: "Pour qui ?",
-            intro: "Ce bundle prestige est conçu pour :",
-            list: [
-                "les amateurs de gastronomie",
-                "les chefs et passionnés de cuisine",
-                "les cadeaux haut de gamme",
-                "les épicuriens à la recherche de rareté",
-                "les amoureux de l'authentique"
-            ],
-            outro: "Un cadeau qui marque, qui raconte une histoire, et qui se transmet."
-        },
-        experience: "Le Bundle Prestige ORAVANY incarne l'excellence : la rareté d'un poivre d'exception, sublimée par l'élégance d'un poivrier en bois noble. Un duo précieux, pensé pour celles et ceux qui placent la cuisine au rang d'art.",
-        price: 59.00,
-        unit: 'coffret',
-        formats: [
-            { label: 'Coffret', price: 59.00 }
+            { label: '50g + poivrier', price: 19.90 },
+            { label: '100g + poivrier', price: 24.00 },
+            { label: '250g + poivrier', price: 37.00 }
         ],
         image: IMG.bundle,
         gallery: [IMG.bundle, IMG.poivreSauvage, IMG.foret, IMG.recoltant],
-        badge: 'Prestige',
-        featured: false,
-        notes: ['Rare', 'Cadeau', 'Premium']
-    },
-
-    /* ============================================
-       BUNDLE 3, Coffret Dégustation (3 poivres)
-       ============================================ */
-    {
-        id: 'bundle-degustation',
-        name: 'Coffret Dégustation',
-        latinName: 'Voatsiperifery + Poivre noir + Poivrier',
-        category: 'bundles',
-        categoryLabel: 'Bundles',
-        tagline: "Le voyage complet, des forêts au moulin",
-        shortDesc: "100g Voatsiperifery + 100g Poivre noir + poivrier acacia premium, le coffret signature.",
-        heroDescription: "Le Coffret Dégustation ORAVANY rassemble l'essence de notre maison : 100g de Poivre Sauvage Voatsiperifery et 100g de Poivre Noir de Madagascar, accompagnés d'un poivrier en bois d'acacia premium pour les sublimer. Deux poivres aux signatures opposées et complémentaires, l'un rare et floral, l'autre noble et fruité, pour explorer toute la richesse aromatique du terroir malgache. Un cadeau exceptionnel, à offrir à un proche ou à savourer pour soi.",
-        aromatic: {
-            title: "Deux poivres, deux univers",
-            intro: "Une dégustation comparée à travers :",
-            notes: [
-                "le Voatsiperifery, boisé, citronné, floral",
-                "le Poivre noir, fruité, briochée, résineux",
-                "deux mouture conseillées : grossière puis fine",
-                "deux moments : sur viande blanche puis viande rouge",
-                "un livret de dégustation pour vous guider"
-            ],
-            outro: "Une véritable expérience gustative à partager, autour d'une table, en cuisine, ou comme un rituel personnel."
-        },
-        tasting: {
-            title: "Composition du coffret",
-            intro: "Votre coffret signature contient :",
-            ideal: [
-                "1 boîte 100g de Poivre Sauvage Voatsiperifery",
-                "1 boîte 100g de Poivre Noir de Madagascar",
-                "1 poivrier manuel acacia premium (20 cm)",
-                "Livret de dégustation complet",
-                "Coffret cadeau noble"
-            ]
-        },
-        origin: {
-            title: "Le meilleur des deux mondes",
-            text: "Le Voatsiperifery vient des forêts primaires du sud-est malgache, cueilli à la main. Le poivre noir est cultivé à Nossi-Be et au Sambirano selon des méthodes héritées d'un siècle de tradition. Deux terroirs, deux histoires, un même engagement qualité."
-        },
-        benefits: {
-            title: "Le cadeau ultime",
-            intro: "Ce coffret est conçu pour :",
-            list: [
-                "les passionnés de gastronomie",
-                "les cadeaux d'exception",
-                "les amateurs de découvertes sensorielles",
-                "les fêtes de fin d'année",
-                "les chefs et amateurs avertis"
-            ],
-            outro: "Un coffret qui se garde, qui se partage et qui se savoure."
-        },
-        experience: "Le Coffret Dégustation ORAVANY est l'invitation au voyage par excellence. Deux poivres, deux histoires, un même savoir-faire, l'âme aromatique de Madagascar, condensée en un coffret précieux.",
-        price: 79.00,
-        unit: 'coffret',
-        formats: [
-            { label: 'Coffret', price: 79.00 }
-        ],
-        image: IMG.bundle,
-        gallery: [IMG.bundle, IMG.poivreSauvage, IMG.poivreNoir, IMG.recoltant],
-        badge: 'Signature',
+        badge: 'Cadeau',
         featured: true,
-        notes: ['Découverte', 'Premium', 'Cadeau']
+        notes: ['Cadeau', 'Premium', 'Complet']
     },
 
     /* ============================================
