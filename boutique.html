@@ -111,6 +111,29 @@
             border-radius: 2px;
             margin-bottom: 1.25rem;
         }
+
+        /* Carte "Phare" : prend 2 colonnes et image en format paysage immersif */
+        .shop-card--featured {
+            grid-column: span 2;
+        }
+        .shop-card--featured .shop-card-image {
+            aspect-ratio: 16 / 9;
+        }
+        .shop-card--featured .shop-card-name {
+            font-size: 1.7rem;
+            margin-top: 0.25rem;
+        }
+        .shop-card--featured .shop-card-info {
+            max-width: 640px;
+        }
+        @media (max-width: 800px) {
+            .shop-card--featured { grid-column: span 2; }
+            .shop-card--featured .shop-card-image { aspect-ratio: 4 / 3; }
+        }
+        @media (max-width: 480px) {
+            .shop-card--featured { grid-column: span 1; }
+            .shop-card--featured .shop-card-image { aspect-ratio: 16 / 10; }
+        }
         .shop-card-image img {
             width: 100%;
             height: 100%;
@@ -308,8 +331,10 @@
         grid.innerHTML = list.map(p => {
             const minPrice = getMinPrice(p);
             const cls = badgeClass(p.badge);
+            const isFeatured = p.badge && p.badge.toLowerCase().includes('phare');
+            const cardClass = isFeatured ? 'shop-card shop-card--featured' : 'shop-card';
             return `
-                <article class="shop-card">
+                <article class="${cardClass}">
                     <div class="shop-card-image">
                         ${p.badge ? `<span class="shop-badge ${cls}">${p.badge}</span>` : ''}
                         <a href="produit.html?id=${p.id}">
