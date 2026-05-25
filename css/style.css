@@ -1600,6 +1600,22 @@ h4 { font-size: clamp(1.2rem, 2vw, 1.5rem); }
     font-weight: 500;
 }
 
+.cart-item-unit {
+    font-size: 0.82rem;
+    color: var(--color-grey);
+    font-style: italic;
+    margin: 0;
+}
+
+.cart-item-line-total {
+    font-family: var(--font-title);
+    font-size: 1.25rem;
+    font-weight: 500;
+    color: var(--color-green);
+    margin: 0;
+    line-height: 1;
+}
+
 .cart-item-right {
     display: flex;
     flex-direction: column;

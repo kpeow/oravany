@@ -70,7 +70,7 @@
                             <div class="cart-item-info">
                                 <h3>${item.name}</h3>
                                 <p class="cart-item-format">Format : ${item.format}</p>
-                                <p class="cart-item-price">${formatPrice(item.price)}</p>
+                                <p class="cart-item-unit">${formatPrice(item.price)} l'unité</p>
                             </div>
                             <div class="cart-item-right">
                                 <div class="quantity-selector">
@@ -79,6 +79,7 @@
                                            onchange="setQty('${item.id}', '${item.format}', this.value)">
                                     <button class="qty-btn" onclick="changeQty('${item.id}', '${item.format}', 1)">+</button>
                                 </div>
+                                <p class="cart-item-line-total">${formatPrice(item.price * item.quantity)}</p>
                                 <button class="cart-item-remove" onclick="removeItem('${item.id}', '${item.format}')">
                                     Retirer
                                 </button>
