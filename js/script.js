@@ -1,5 +1,5 @@
 /* =========================================================
-   ORAVANY — Script principal
+   ORAVANY, Script principal
    Header injecté, footer injecté, panier localStorage,
    menu mobile, toast notifications.
    ========================================================= */
@@ -103,7 +103,7 @@ const FOOTER_HTML = `
             </div>
         </div>
         <div class="footer-bottom">
-            <div>© 2025 ORAVANY — Antananarivo, Madagascar. Tous droits réservés.</div>
+            <div>© 2025 ORAVANY, Antananarivo, Madagascar. Tous droits réservés.</div>
             <div class="footer-payments">
                 <span style="opacity:0.7; font-size:0.75rem; letter-spacing:0.15em; text-transform:uppercase;">Paiement sécurisé</span>
                 <svg width="34" height="22" viewBox="0 0 34 22" fill="none"><rect width="34" height="22" rx="3" fill="#1A1F71"/><text x="17" y="15" text-anchor="middle" fill="white" font-size="9" font-weight="bold" font-family="Arial">VISA</text></svg>

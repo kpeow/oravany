@@ -4,7 +4,7 @@
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0, viewport-fit=cover">
     <meta name="theme-color" content="#F4EFE7">
-    <title>Produit — ORAVANY</title>
+    <title>Produit, ORAVANY</title>
 
     <link rel="icon" type="image/png" href="assets/images/logo.png">
     <link rel="preconnect" href="https://fonts.googleapis.com">
@@ -81,12 +81,12 @@
             return;
         }
 
-        document.title = `${product.name} — ORAVANY`;
+        document.title = `${product.name}, ORAVANY`;
         document.getElementById('bc-category').textContent = product.name;
 
         const formatsHTML = product.formats.map((f, i) => `
             <button class="format-option ${i === 0 ? 'active' : ''}" data-format="${f.label}" data-price="${f.price}">
-                ${f.label} — ${formatPrice(f.price)}
+                ${f.label}, ${formatPrice(f.price)}
             </button>
         `).join('');
 
@@ -254,7 +254,7 @@
                     <div class="experience-block">
                         <h2>L'expérience ORAVANY</h2>
                         <p>${product.experience}</p>
-                        <p class="experience-signature">ORAVANY — Wild Spices From Madagascar</p>
+                        <p class="experience-signature">ORAVANY, Wild Spices From Madagascar</p>
                     </div>
                 </div>
             `);

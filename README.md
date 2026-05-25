@@ -1,4 +1,4 @@
-# ORAVANY — Wild Spices From Madagascar
+# ORAVANY, Wild Spices From Madagascar
 
 Site e-commerce officiel d'ORAVANY, marque premium d'épices rares de Madagascar.
 
@@ -6,11 +6,11 @@ Site e-commerce officiel d'ORAVANY, marque premium d'épices rares de Madagascar
 
 ## 🌿 Produits
 
-- **Poivre Sauvage Voatsiperifery** — L'or noir sauvage de Madagascar
-- **Vanille Bourbon Premium** — L'élégance authentique de la vanille malgache
-- **Clou de Girofle Premium** — Une épice rare aux arômes puissants
-- **Cannelle Premium** — La douceur chaleureuse des épices tropicales
-- **Riz Premium de Madagascar** — L'authenticité d'un riz d'exception
+- **Poivre Sauvage Voatsiperifery**, L'or noir sauvage de Madagascar
+- **Vanille Bourbon Premium**, L'élégance authentique de la vanille malgache
+- **Clou de Girofle Premium**, Une épice rare aux arômes puissants
+- **Cannelle Premium**, La douceur chaleureuse des épices tropicales
+- **Riz Premium de Madagascar**, L'authenticité d'un riz d'exception
 
 ## 🏗️ Stack technique
 
@@ -53,4 +53,4 @@ Push sur la branche `main` → déploiement automatique sur Netlify (oravany.com
 
 ---
 
-© 2025 ORAVANY — Antananarivo, Madagascar
+© 2025 ORAVANY, Antananarivo, Madagascar
