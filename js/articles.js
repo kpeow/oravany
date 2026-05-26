@@ -80,7 +80,7 @@ const ARTICLES = [
 
             <p>C'est ici que la magie opère vraiment. Au fil des semaines, les composés aromatiques se concentrent, la vanilline se développe, les notes de cacao, de pruneau et de fleurs blanches se déploient progressivement.</p>
 
-            <h2>Étape 4, la mise en malle (affinage final)</ h2>
+            <h2>Étape 4, la mise en malle (affinage final)</h2>
             <p>Les gousses sèches sont alors triées une par une selon leur taille, leur souplesse, leur taux de vanilline. Les plus belles, les plus charnues, partent dans la catégorie <em>gourmet</em>, c'est notre sélection ORAVANY. Elles sont ensuite placées dans des malles en bois, recouvertes de papier sulfurisé, pour un affinage final de 6 mois minimum.</p>
 
             <p>Pendant ce temps, les arômes continuent de s'harmoniser, de gagner en complexité, en rondeur. C'est l'équivalent d'un vieillissement en cave pour un grand cru. À l'ouverture des malles, l'arôme qui s'en dégage est inoubliable.</p>
